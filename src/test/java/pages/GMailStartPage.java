@@ -6,10 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Dauren_Altynbekov on 8/12/2015.
  */
-public class GMailStartPage {
+public class GMailStartPage implements Page{
+
     public static final String HTTP_GMAIL_COM = "http://gmail.com";
     private WebDriver driver;
 
@@ -19,7 +22,7 @@ public class GMailStartPage {
     @FindBy(id="next")
     private WebElement nextToPasswdBtn;
 
-    @FindBy(xpath="//input[contains(@type,'password')]")
+    @FindBy(id="Passwd")
     private WebElement passwdInput;
 
     @FindBy(id="signIn")
@@ -34,10 +37,17 @@ public class GMailStartPage {
         this.driver.get(HTTP_GMAIL_COM);
     }
 
-    public void login(String email, String password){
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public GMailMainPage login(String email, String password){
         emailInput.sendKeys(email);
         nextToPasswdBtn.click();
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         passwdInput.sendKeys(password);
         signInBtn.click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        return new GMailMainPage(this.driver);
     }
 }

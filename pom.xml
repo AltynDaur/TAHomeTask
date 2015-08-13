@@ -19,6 +19,11 @@
             <artifactId>testng</artifactId>
             <version>6.9.6</version>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <artifactId>htmlelements</artifactId>
+            <version>1.14</version>
+        </dependency>
     </dependencies>
 
 
