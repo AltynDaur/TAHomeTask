@@ -1,8 +1,10 @@
 package pages.blocks;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.HtmlElement;
+import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
@@ -30,5 +32,9 @@ public class MainMenuBlock extends HtmlElement{
 
     public void goToSent(){
         sentLink.click();
+    }
+
+    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return null;
     }
 }
