@@ -1,5 +1,6 @@
 package tests;
 
+import driver.SingleWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -23,11 +24,11 @@ public class GmailTest {
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
 
-    WebDriver driver = new FirefoxDriver();
+    WebDriver driver = SingleWebDriver.getFirefoxDriverInstance();
     GmailStartPage mailStartPage = new GmailStartPage(driver);
-    GmailInboxPage inboxPage = new GmailInboxPage(driver);
-    GmailDraftsPage draftsPage = new GmailDraftsPage(driver);
-    GmailSentPage sentPage = new GmailSentPage(driver);
+    GmailInboxPage inboxPage = new GmailInboxPage();
+    GmailDraftsPage draftsPage = new GmailDraftsPage();
+    GmailSentPage sentPage = new GmailSentPage();
 
     @Test
     public void oneCanLoginGmail(){
@@ -43,7 +44,6 @@ public class GmailTest {
 
     @Test(dependsOnMethods = {"oneCanLoginGmail"})
     public void oneCanCreateNewMail(){
-        inboxPage.openPage();
         inboxPage.startNewMail();
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(),"Новое сообщение");
     }

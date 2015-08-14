@@ -24,6 +24,10 @@ public class GmailSentPage implements Page {
         PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }
 
+    public GmailSentPage() {
+
+    }
+
     public void openPage() {
         this.driver.get(GMAIL_SENT_PAGE);
     }

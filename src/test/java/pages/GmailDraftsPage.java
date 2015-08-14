@@ -25,6 +25,10 @@ public class GmailDraftsPage implements Page {
         PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }
 
+    public GmailDraftsPage() {
+
+    }
+
     public void openPage() {
         this.driver.get(GMAIL_DRAFTS_PAGE);
     }

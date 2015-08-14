@@ -47,7 +47,6 @@ public class GmailStartPage implements Page {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         passwdInput.sendKeys(password);
         signInBtn.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         return new GmailInboxPage(this.driver);
     }
 }

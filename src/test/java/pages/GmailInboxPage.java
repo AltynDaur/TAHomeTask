@@ -25,6 +25,10 @@ public class GmailInboxPage implements Page {
         PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }
 
+    public GmailInboxPage() {
+
+    }
+
     public void openPage() {
         this.driver.get(GMAIL_INBOX_PAGE);
     }
