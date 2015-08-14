@@ -57,4 +57,9 @@ public class GmailDraftsPage implements Page {
     public void sendMailFromDialog() {
         mailDialog.sendMailFromDialog();
     }
+
+    public GmailSentPage goToSent() {
+        mainMenu.goToSent();
+        return new GmailSentPage(this.driver);
+    }
 }

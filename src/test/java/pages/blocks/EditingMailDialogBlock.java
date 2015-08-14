@@ -12,13 +12,13 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='AD']")
 public class EditingMailDialogBlock extends HtmlElement {
 
-    @FindBy(xpath = "//div[@class='AD']//div[@class='oL aDm az9']/span")
+    @FindBy(xpath = "//div[@class='AD']//form//div[@class='oL aDm az9']/span")
     private WebElement mailAddressInput;
 
-    @FindBy(xpath = "//div[@class='AD']//div[@class='aoD az6']/input")
+    @FindBy(xpath = "//div[@class='AD']//form//input[@type='hidden' and @name='subject']")
     private WebElement mailThemeInput;
 
-    @FindBy(xpath = "//div[@class='AD']//div[@class='Ap']//div[contains(@role,'textbox')]")
+    @FindBy(xpath = "//div[@class='AD']//table//div[@class='Ar Au Ao']/div")
     private WebElement mailBodyInput;
 
     @FindBy(className = "Ha")
@@ -32,7 +32,7 @@ public class EditingMailDialogBlock extends HtmlElement {
     }
 
     public String getMailThemeFromDialog() {
-        return mailThemeInput.getText();
+        return mailThemeInput.getAttribute("value");
     }
 
     public String getMailBodyFromDialog() {

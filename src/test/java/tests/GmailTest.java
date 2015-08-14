@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.GmailDraftsPage;
+import pages.GmailSentPage;
 import pages.GmailStartPage;
 import pages.GmailInboxPage;
 
@@ -18,14 +19,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class GmailTest {
 
-    public static final String MAIL_ADDRESS = "altyndaur@gmail.com";
+    public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
+
     WebDriver driver = new FirefoxDriver();
     GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage(driver);
     GmailDraftsPage draftsPage = new GmailDraftsPage(driver);
-
+    GmailSentPage sentPage = new GmailSentPage(driver);
 
     @Test
     public void oneCanLoginGmail(){
@@ -35,7 +37,7 @@ public class GmailTest {
 
     @Test(dependsOnMethods = {"oneCanLoginGmail"})
     public void isLoginSuccessfully(){
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
@@ -82,17 +84,23 @@ public class GmailTest {
     }
 
     @Test(dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"})
-    public void sendMailFromDraft(){
+    public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
     }
 
-    @Test(dependsOnMethods = {"sendMailFromDraft"},expectedExceptions = NoSuchElementException.class)
+    @Test(dependsOnMethods = {"sentMailFromDraft"})
     public void checkMailInDraftAfterSending(){
-        Assert.assertEquals(draftsPage.getLastMailThemeInCategory(), MAIL_THEME);
+        Assert.assertNotEquals(draftsPage.getLastMailThemeInCategory(), null);
     }
 
-    @Test(dependsOnMethods = {"sendMailFromDraft"})
-    public void checkSendedMailInSendCategoory(){
+    @Test(dependsOnMethods = {"sentMailFromDraft"})
+    public void checkSentMailInSentCategoory() {
+        sentPage = draftsPage.goToSent();
+        Assert.assertEquals(sentPage.getLastMailThemeInCategory(), MAIL_THEME);
+    }
 
+    @Test(dependsOnMethods = {"checkSentMailInSentCategoory"})
+    public void closeGmail() {
+        sentPage.logout();
     }
 }
