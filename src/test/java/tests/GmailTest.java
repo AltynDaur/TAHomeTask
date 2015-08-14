@@ -38,14 +38,14 @@ public class GmailTest {
 
     @Test(dependsOnMethods = {"oneCanLoginGmail"})
     public void isLoginSuccessfully(){
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
     @Test(dependsOnMethods = {"oneCanLoginGmail"})
     public void oneCanCreateNewMail(){
         inboxPage.startNewMail();
-        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(),"Новое сообщение");
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(), "Новое сообщение");
     }
 
     @Test(dependsOnMethods = {"oneCanCreateNewMail"})
@@ -71,15 +71,13 @@ public class GmailTest {
     }
 
 
-    @Test(dependsOnMethods = {"checkNewMailInDraft"})
+    @Test(dependsOnMethods = {"checkAddressNewMailInDraft"})
     public void checkThemeNewMailInDraft() {
-        draftsPage.openLastMailInCategory();
         Assert.assertEquals(draftsPage.getMailThemeFromDialog(), MAIL_THEME);
     }
 
-    @Test(dependsOnMethods = {"checkNewMailInDraft"})
+    @Test(dependsOnMethods = {"checkThemeNewMailInDraft"})
     public void checkBodyNewMailInDraft() {
-        draftsPage.openLastMailInCategory();
         Assert.assertEquals(draftsPage.getMailBodyFromDialog(), MAIL_BODY);
     }
 
@@ -88,7 +86,7 @@ public class GmailTest {
         draftsPage.sendMailFromDialog();
     }
 
-    @Test(dependsOnMethods = {"sentMailFromDraft"})
+    @Test(dependsOnMethods = {"sentMailFromDraft"}, expectedExceptions = NoSuchElementException.class)
     public void checkMailInDraftAfterSending(){
         Assert.assertNotEquals(draftsPage.getLastMailThemeInCategory(), null);
     }
@@ -102,5 +100,6 @@ public class GmailTest {
     @Test(dependsOnMethods = {"checkSentMailInSentCategoory"})
     public void closeGmail() {
         sentPage.logout();
+        SingleWebDriver.closeBrowser();
     }
 }

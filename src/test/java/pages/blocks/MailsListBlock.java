@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
  */
 @FindBy(xpath = "//div[@class='ae4 UI']")
 public class MailsListBlock extends HtmlElement {
-    @FindBy(xpath = "//table[@class='F cf zt']//tr[1]//td[@class='xY a4W']//div[@class='y6']/span")
+    @FindBy(xpath = "//div[@class='BltHke nH oy8Mbf' and @role='main']//div[@class='y6']/span[1]")
     private WebElement lastMailThemeInCategoryLabel;
 
     @FindBy(xpath = "//table[@class='F cf zt']//tr[1]")

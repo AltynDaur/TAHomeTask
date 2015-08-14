@@ -1,10 +1,8 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import pages.blocks.CreatingMailDialogBlock;
-import pages.blocks.EditingMailDialogBlock;
+import pages.blocks.EditingMailMainBlock;
 import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
@@ -18,7 +16,7 @@ public class GmailDraftsPage implements Page {
 
     private MainMenuBlock mainMenu;
     private MailsListBlock mailsList;
-    private EditingMailDialogBlock mailDialog;
+    private EditingMailMainBlock mailMainBlock;
 
     public GmailDraftsPage(WebDriver driver) {
         this.driver = driver;
@@ -47,19 +45,19 @@ public class GmailDraftsPage implements Page {
     }
 
     public String getMailAddressFromDialog() {
-        return mailDialog.getMailAddressFromDialog();
+        return mailMainBlock.getMailAddressFromDialog();
     }
 
     public String getMailThemeFromDialog() {
-        return mailDialog.getMailThemeFromDialog();
+        return mailMainBlock.getMailThemeFromDialog();
     }
 
     public String getMailBodyFromDialog() {
-        return mailDialog.getMailBodyFromDialog();
+        return mailMainBlock.getMailBodyFromDialog();
     }
 
     public void sendMailFromDialog() {
-        mailDialog.sendMailFromDialog();
+        mailMainBlock.sendMailFromDialog();
     }
 
     public GmailSentPage goToSent() {
