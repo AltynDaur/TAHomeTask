@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.GmailDraftsPage;
@@ -24,7 +25,7 @@ public class GmailTest {
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
 
-    WebDriver driver = SingleWebDriver.getFirefoxDriverInstance();
+    WebDriver driver = SingleWebDriver.getRemoteDriver();
     GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailDraftsPage draftsPage = new GmailDraftsPage();
