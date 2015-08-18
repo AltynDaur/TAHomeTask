@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/12/2015.
  */
-public class GmailTest {
+public class GmailSendingTest {
 
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
@@ -33,7 +33,7 @@ public class GmailTest {
     GmailSentPage sentPage = new GmailSentPage();
 
     @Test
-    public void isLoginSuccessfully(){
+    public void isLoginSuccessfully() {
         mailStartPage.openPage();
         inboxPage = mailStartPage.login("autodaurtest@gmail.com", "autodaurtest1");
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
@@ -41,13 +41,13 @@ public class GmailTest {
     }
 
     @Test(dependsOnMethods = {"isLoginSuccessfully"})
-    public void oneCanCreateNewMail(){
+    public void oneCanCreateNewMail() {
         inboxPage.startNewMail();
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(), "Новое сообщение");
     }
 
     @Test(dependsOnMethods = {"oneCanCreateNewMail"})
-    public void saveNewMailToDraft(){
+    public void saveNewMailToDraft() {
         inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
         inboxPage.closeNewMailDialog();
         draftsPage = inboxPage.goToDrafts();

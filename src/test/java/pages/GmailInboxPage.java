@@ -1,10 +1,9 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import pages.blocks.CreatingMailDialogBlock;
-import pages.blocks.MailsListBlock;
-import pages.blocks.MainMenuBlock;
+import pages.blocks.*;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
@@ -18,6 +17,9 @@ public class GmailInboxPage implements Page {
     private MainMenuBlock mainMenu;
     private MailsListBlock mailsList;
     private CreatingMailDialogBlock mailDialog;
+    private SettingsDialogBlock settingsDialog;
+    private HelpToolBarBlock helpToolBar;
+    private HelpDialogBlock helpDialog;
     private WebDriver driver;
 
     public GmailInboxPage(WebDriver driver) {
@@ -53,5 +55,25 @@ public class GmailInboxPage implements Page {
         mainMenu.goToDrafts();
         driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
         return new GmailDraftsPage(this.driver);
+    }
+
+    public void openSettingsDialog() {
+        helpToolBar.openSettingsDialog();
+    }
+
+    public void openHelpDialog() {
+        settingsDialog.openHelp();
+    }
+
+    public void search(String searchString) {
+        helpDialog.search(searchString);
+    }
+
+    public boolean isHaveThisOption(String expectedOption) {
+        return helpDialog.isHaveThisOption(expectedOption);
+    }
+
+    public WebElement getHelpDialog() {
+        return helpDialog;
     }
 }
