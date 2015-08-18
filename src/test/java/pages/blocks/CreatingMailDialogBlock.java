@@ -27,6 +27,9 @@ public class CreatingMailDialogBlock extends HtmlElement {
     @FindBy(xpath = "//div[@class='AD']//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
     private WebElement sendBtnInDialog;
 
+    @FindBy(xpath = "//div[@class='aYF']")
+    private WebElement dialogTitle;
+
     public void writeNewMail(String address, String theme, String mailText) {
         newMailAddressInput.sendKeys(address);
         newMailThemeInput.sendKeys(theme);
@@ -40,6 +43,10 @@ public class CreatingMailDialogBlock extends HtmlElement {
 
     public void sendMailFromDialog() {
         sendBtnInDialog.click();
+    }
+
+    public String getTitle() {
+        return dialogTitle.getText();
     }
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {

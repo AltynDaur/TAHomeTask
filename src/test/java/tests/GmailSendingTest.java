@@ -25,6 +25,8 @@ public class GmailSendingTest {
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
+    public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
+    public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
 
     WebDriver driver = SingleWebDriver.getRemoteDriver();
     GmailStartPage mailStartPage = new GmailStartPage(driver);
@@ -35,7 +37,7 @@ public class GmailSendingTest {
     @Test
     public void isLoginSuccessfully() {
         mailStartPage.openPage();
-        inboxPage = mailStartPage.login("autodaurtest@gmail.com", "autodaurtest1");
+        inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
@@ -43,7 +45,7 @@ public class GmailSendingTest {
     @Test(dependsOnMethods = {"isLoginSuccessfully"})
     public void oneCanCreateNewMail() {
         inboxPage.startNewMail();
-        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(), "Новое сообщение");
+        Assert.assertEquals(inboxPage.getCreatingDialogTitle(), "Новое сообщение");
     }
 
     @Test(dependsOnMethods = {"oneCanCreateNewMail"})

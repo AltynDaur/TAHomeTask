@@ -76,4 +76,8 @@ public class GmailInboxPage implements Page {
     public WebElement getHelpDialog() {
         return helpDialog;
     }
+
+    public String getCreatingDialogTitle() {
+        return mailDialog.getTitle();
+    }
 }
