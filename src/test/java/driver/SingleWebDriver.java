@@ -22,7 +22,7 @@ public class SingleWebDriver {
 
     public static WebDriver getFirefoxDriverInstance() {
         if (driver == null) {
-            driver = new ChromeDriver();
+            driver = new FirefoxDriver();
         }
         return driver;
     }
