@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import pages.GmailDraftsPage;
 import pages.GmailSentPage;
@@ -32,40 +33,28 @@ public class GmailTest {
     GmailSentPage sentPage = new GmailSentPage();
 
     @Test
-    public void oneCanLoginGmail(){
+    public void isLoginSuccessfully(){
         mailStartPage.openPage();
         inboxPage = mailStartPage.login("autodaurtest@gmail.com", "autodaurtest1");
-    }
-
-    @Test(dependsOnMethods = {"oneCanLoginGmail"})
-    public void isLoginSuccessfully(){
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
-    @Test(dependsOnMethods = {"oneCanLoginGmail"})
+    @Test(dependsOnMethods = {"isLoginSuccessfully"})
     public void oneCanCreateNewMail(){
         inboxPage.startNewMail();
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class='aYF']")).getText(), "Новое сообщение");
     }
 
     @Test(dependsOnMethods = {"oneCanCreateNewMail"})
-    public void oneCanFillMailFields(){
-        inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
-    }
-
-    @Test(dependsOnMethods = {"oneCanFillMailFields"})
     public void saveNewMailToDraft(){
+        inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
         inboxPage.closeNewMailDialog();
-    }
-
-    @Test(dependsOnMethods = {"saveNewMailToDraft"})
-    public void checkNewMailInDraft(){
         draftsPage = inboxPage.goToDrafts();
         Assert.assertEquals(draftsPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
-    @Test(dependsOnMethods = {"checkNewMailInDraft"})
+    @Test(dependsOnMethods = {"saveNewMailToDraft"})
     public void checkAddressNewMailInDraft() {
         draftsPage.openLastMailInCategory();
         Assert.assertEquals(draftsPage.getMailAddressFromDialog(), MAIL_ADDRESS);
@@ -82,13 +71,9 @@ public class GmailTest {
         Assert.assertEquals(draftsPage.getMailBodyFromDialog(), MAIL_BODY);
     }
 
-    @Test(dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"})
+    @Test(dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"}, expectedExceptions = NoSuchElementException.class)
     public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
-    }
-
-    @Test(dependsOnMethods = {"sentMailFromDraft"}, expectedExceptions = NoSuchElementException.class)
-    public void checkMailInDraftAfterSending(){
         Assert.assertNotEquals(draftsPage.getLastMailThemeInCategory(), null);
     }
 
@@ -98,7 +83,7 @@ public class GmailTest {
         Assert.assertEquals(sentPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
-    @Test(dependsOnMethods = {"checkSentMailInSentCategoory"})
+    @AfterTest(dependsOnMethods = {"checkSentMailInSentCategoory"})
     public void closeGmail() {
         sentPage.logout();
         SingleWebDriver.closeBrowser();
