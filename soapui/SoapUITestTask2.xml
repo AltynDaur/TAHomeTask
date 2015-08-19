@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="9391f403-4b67-4357-9bd3-fd15e7ea8344" activeEnvironment="Default" name="SoapUITestProjectTask#2" resourceRoot="" soapui-version="5.1.3" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="7c9951ee-fc51-421b-9a8c-b236b384a9aa" wsaVersion="NONE" name="TrigonometricCalculatorWSPortBinding" type="wsdl" bindingName="{http://service.soapui.services.cdp.epam.com/}TrigonometricCalculatorWSPortBinding" soapVersion="1_1" anonymous="optional" definition="file:/D:/TA/calculator_wsdl.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\D:\TA\calculator_wsdl.xml"><con:part><con:url>file:\D:\TA\calculator_wsdl.xml</con:url><con:content><![CDATA[<definitions targetNamespace="http://service.soapui.services.cdp.epam.com/" name="TrigonometricCalculatorWSService" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.soapui.services.cdp.epam.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <wsp1_2:Policy wsu:Id="UsernameToken" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:ssp="http://schemas.sun.com/2006/03/wss/server" xmlns:sunwsp="http://java.sun.com/xml/ns/wsit/policy">
+    <sp:SupportingTokens>
+      <wsp1_2:Policy>
+        <sp:UsernameToken sp:IncludeToken=".../IncludeToken/AlwaysToRecipient"/>
+      </wsp1_2:Policy>
+    </sp:SupportingTokens>
+  </wsp1_2:Policy>
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://service.soapui.services.cdp.epam.com/" schemaLocation="http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator?xsd=1"/>
+    </xsd:schema>
+  </types>
+  <message name="sin">
+    <part name="parameters" element="tns:sin"/>
+  </message>
+  <message name="sinResponse">
+    <part name="parameters" element="tns:sinResponse"/>
+  </message>
+  <message name="UnsupportedOperationException">
+    <part name="fault" element="tns:UnsupportedOperationException"/>
+  </message>
+  <message name="OperationInvokeException">
+    <part name="fault" element="tns:OperationInvokeException"/>
+  </message>
+  <message name="cos">
+    <part name="parameters" element="tns:cos"/>
+  </message>
+  <message name="cosResponse">
+    <part name="parameters" element="tns:cosResponse"/>
+  </message>
+  <message name="mod">
+    <part name="parameters" element="tns:mod"/>
+  </message>
+  <message name="modResponse">
+    <part name="parameters" element="tns:modResponse"/>
+  </message>
+  <message name="ZeroDivideException">
+    <part name="fault" element="tns:ZeroDivideException"/>
+  </message>
+  <message name="percent">
+    <part name="parameters" element="tns:percent"/>
+  </message>
+  <message name="percentResponse">
+    <part name="parameters" element="tns:percentResponse"/>
+  </message>
+  <message name="divide">
+    <part name="parameters" element="tns:divide"/>
+  </message>
+  <message name="divideResponse">
+    <part name="parameters" element="tns:divideResponse"/>
+  </message>
+  <message name="multiply">
+    <part name="parameters" element="tns:multiply"/>
+  </message>
+  <message name="multiplyResponse">
+    <part name="parameters" element="tns:multiplyResponse"/>
+  </message>
+  <message name="negate">
+    <part name="parameters" element="tns:negate"/>
+  </message>
+  <message name="negateResponse">
+    <part name="parameters" element="tns:negateResponse"/>
+  </message>
+  <message name="plus">
+    <part name="parameters" element="tns:plus"/>
+  </message>
+  <message name="plusResponse">
+    <part name="parameters" element="tns:plusResponse"/>
+  </message>
+  <message name="minus">
+    <part name="parameters" element="tns:minus"/>
+  </message>
+  <message name="minusResponse">
+    <part name="parameters" element="tns:minusResponse"/>
+  </message>
+  <message name="inverse">
+    <part name="parameters" element="tns:inverse"/>
+  </message>
+  <message name="inverseResponse">
+    <part name="parameters" element="tns:inverseResponse"/>
+  </message>
+  <message name="degree">
+    <part name="parameters" element="tns:degree"/>
+  </message>
+  <message name="degreeResponse">
+    <part name="parameters" element="tns:degreeResponse"/>
+  </message>
+  <message name="calculate">
+    <part name="parameters" element="tns:calculate"/>
+  </message>
+  <message name="calculateResponse">
+    <part name="parameters" element="tns:calculateResponse"/>
+  </message>
+  <portType name="TrigonometricCalculatorWS">
+    <operation name="sin">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/sinRequest" message="tns:sin"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/sinResponse" message="tns:sinResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/sin/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/sin/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="cos">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/cosRequest" message="tns:cos"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/cosResponse" message="tns:cosResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/cos/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/cos/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="mod">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/modRequest" message="tns:mod"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/modResponse" message="tns:modResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/mod/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/mod/Fault/OperationInvokeException"/>
+      <fault message="tns:ZeroDivideException" name="ZeroDivideException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/mod/Fault/ZeroDivideException"/>
+    </operation>
+    <operation name="percent">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/percentRequest" message="tns:percent"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/percentResponse" message="tns:percentResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/percent/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/percent/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="divide">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divideRequest" message="tns:divide"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divideResponse" message="tns:divideResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divide/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divide/Fault/OperationInvokeException"/>
+      <fault message="tns:ZeroDivideException" name="ZeroDivideException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divide/Fault/ZeroDivideException"/>
+    </operation>
+    <operation name="multiply">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/multiplyRequest" message="tns:multiply"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/multiplyResponse" message="tns:multiplyResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/multiply/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/multiply/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="negate">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/negateRequest" message="tns:negate"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/negateResponse" message="tns:negateResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/negate/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/negate/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="plus">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plusRequest" message="tns:plus"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plusResponse" message="tns:plusResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plus/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plus/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="minus">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/minusRequest" message="tns:minus"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/minusResponse" message="tns:minusResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/minus/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/minus/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="inverse">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverseRequest" message="tns:inverse"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverseResponse" message="tns:inverseResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverse/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverse/Fault/OperationInvokeException"/>
+      <fault message="tns:ZeroDivideException" name="ZeroDivideException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverse/Fault/ZeroDivideException"/>
+    </operation>
+    <operation name="degree">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/degreeRequest" message="tns:degree"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/degreeResponse" message="tns:degreeResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/degree/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/degree/Fault/OperationInvokeException"/>
+    </operation>
+    <operation name="calculate">
+      <input wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/calculateRequest" message="tns:calculate"/>
+      <output wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/calculateResponse" message="tns:calculateResponse"/>
+      <fault message="tns:UnsupportedOperationException" name="UnsupportedOperationException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/calculate/Fault/UnsupportedOperationException"/>
+      <fault message="tns:OperationInvokeException" name="OperationInvokeException" wsam:Action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/calculate/Fault/OperationInvokeException"/>
+    </operation>
+  </portType>
+  <binding name="TrigonometricCalculatorWSPortBinding" type="tns:TrigonometricCalculatorWS">
+    <wsp1_2:PolicyReference URI="#UsernameToken"/>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="sin">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="cos">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="mod">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+      <fault name="ZeroDivideException">
+        <soap:fault name="ZeroDivideException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="percent">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="divide">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+      <fault name="ZeroDivideException">
+        <soap:fault name="ZeroDivideException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="multiply">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="negate">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="plus">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="minus">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="inverse">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+      <fault name="ZeroDivideException">
+        <soap:fault name="ZeroDivideException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="degree">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="calculate">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="UnsupportedOperationException">
+        <soap:fault name="UnsupportedOperationException" use="literal"/>
+      </fault>
+      <fault name="OperationInvokeException">
+        <soap:fault name="OperationInvokeException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="TrigonometricCalculatorWSService">
+    <port name="TrigonometricCalculatorWSPort" binding="tns:TrigonometricCalculatorWSPortBinding">
+      <soap:address location="http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator?xsd=1</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2.-->
+<xs:schema version="1.0" targetNamespace="http://service.soapui.services.cdp.epam.com/" xmlns:tns="http://service.soapui.services.cdp.epam.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="OperationInvokeException" type="tns:OperationInvokeException"/>
+  <xs:element name="UnsupportedOperationException" type="tns:UnsupportedOperationException"/>
+  <xs:element name="ZeroDivideException" type="tns:ZeroDivideException"/>
+  <xs:element name="calculate" type="tns:calculate"/>
+  <xs:element name="calculateResponse" type="tns:calculateResponse"/>
+  <xs:element name="cos" type="tns:cos"/>
+  <xs:element name="cosResponse" type="tns:cosResponse"/>
+  <xs:element name="degree" type="tns:degree"/>
+  <xs:element name="degreeResponse" type="tns:degreeResponse"/>
+  <xs:element name="divide" type="tns:divide"/>
+  <xs:element name="divideResponse" type="tns:divideResponse"/>
+  <xs:element name="inverse" type="tns:inverse"/>
+  <xs:element name="inverseResponse" type="tns:inverseResponse"/>
+  <xs:element name="minus" type="tns:minus"/>
+  <xs:element name="minusResponse" type="tns:minusResponse"/>
+  <xs:element name="mod" type="tns:mod"/>
+  <xs:element name="modResponse" type="tns:modResponse"/>
+  <xs:element name="multiply" type="tns:multiply"/>
+  <xs:element name="multiplyResponse" type="tns:multiplyResponse"/>
+  <xs:element name="negate" type="tns:negate"/>
+  <xs:element name="negateResponse" type="tns:negateResponse"/>
+  <xs:element name="percent" type="tns:percent"/>
+  <xs:element name="percentResponse" type="tns:percentResponse"/>
+  <xs:element name="plus" type="tns:plus"/>
+  <xs:element name="plusResponse" type="tns:plusResponse"/>
+  <xs:element name="sin" type="tns:sin"/>
+  <xs:element name="sinResponse" type="tns:sinResponse"/>
+  <xs:complexType name="plus">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="plusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnsupportedOperationException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OperationInvokeException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="negate">
+    <xs:sequence>
+      <xs:element name="operand" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="negateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="minus">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="minusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="degree">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="degreeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="percent">
+    <xs:sequence>
+      <xs:element name="operand" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="percentResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inverse">
+    <xs:sequence>
+      <xs:element name="operand" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inverseResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZeroDivideException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cos">
+    <xs:sequence>
+      <xs:element name="operand" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="calculate">
+    <xs:sequence>
+      <xs:element name="experession" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="calculateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sin">
+    <xs:sequence>
+      <xs:element name="operand" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sinResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="mod">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="modResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="multiply">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="multiplyResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="divide">
+    <xs:sequence>
+      <xs:element name="operand1" type="xs:string" minOccurs="0"/>
+      <xs:element name="operand2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="divideResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint></con:endpoints><con:operation id="a0e17d20-da80-4578-bdc6-32883554adcd" isOneWay="false" action="" name="calculate" bindingOperationName="calculate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="170791dd-c54b-4a75-9ba5-e467a6c5a44d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:calculate>\r
+         <!--Optional:-->\r
+         <experession>?</experession>\r
+      </ser:calculate>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/calculateRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="5629540e-8d1f-4274-8312-f14c26e63955" isOneWay="false" action="" name="cos" bindingOperationName="cos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f3e193d1-f942-48c4-962a-0ac1087f9f6e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:cos>\r
+         <!--Optional:-->\r
+         <operand>?</operand>\r
+      </ser:cos>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/cosRequest"/></con:call></con:operation><con:operation id="49aba68c-c072-4fc5-a743-940280112e3f" isOneWay="false" action="" name="degree" bindingOperationName="degree" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e2bb5533-d247-4083-99ea-44965a19d9aa" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:degree>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:degree>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/degreeRequest"/></con:call></con:operation><con:operation id="52112b16-4abb-4bef-b5ce-f5bb4f051a0c" isOneWay="false" action="" name="divide" bindingOperationName="divide" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e29e806f-806e-4453-b56e-da6d82c73ecc" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:divide>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:divide>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/divideRequest"/></con:call></con:operation><con:operation id="d9bba6c7-051f-4e84-8bd8-bec75f6c975b" isOneWay="false" action="" name="inverse" bindingOperationName="inverse" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a9a57c05-9151-4513-9549-b6059599bde5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:inverse>\r
+         <!--Optional:-->\r
+         <operand>?</operand>\r
+      </ser:inverse>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/inverseRequest"/></con:call></con:operation><con:operation id="3387d206-379b-4cb7-a577-98bb154ae72b" isOneWay="false" action="" name="minus" bindingOperationName="minus" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="32e152e4-25ed-4312-9f9e-4320e79c1a10" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:minus>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:minus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/minusRequest"/></con:call></con:operation><con:operation id="6bcaab84-06ee-4dde-93e6-1ec22d503f70" isOneWay="false" action="" name="mod" bindingOperationName="mod" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="066b5155-abe0-454c-873f-d5a602e6733f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:mod>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:mod>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/modRequest"/></con:call></con:operation><con:operation id="fa10e863-94d2-4b47-8d53-5209f7fa6902" isOneWay="false" action="" name="multiply" bindingOperationName="multiply" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="158a75b2-fcf5-4110-8eba-f388c89f369f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:multiply>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:multiply>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/multiplyRequest"/></con:call></con:operation><con:operation id="47d139e0-8be6-4911-93aa-799da711dd8a" isOneWay="false" action="" name="negate" bindingOperationName="negate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4e82eeea-9a6f-483e-acf9-18db99f0c150" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:negate>\r
+         <!--Optional:-->\r
+         <operand>?</operand>\r
+      </ser:negate>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/negateRequest"/></con:call></con:operation><con:operation id="d331bf40-7532-409c-8fc9-9728ece81b1f" isOneWay="false" action="" name="percent" bindingOperationName="percent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1ee3e1f5-9d07-4801-8e4d-fae2217b256d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:percent>\r
+         <!--Optional:-->\r
+         <operand>?</operand>\r
+      </ser:percent>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/percentRequest"/></con:call></con:operation><con:operation id="36be4ae3-a2be-4885-b1ce-0f2172cecfeb" isOneWay="false" action="" name="plus" bindingOperationName="plus" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="573f6af4-23b5-4767-ac0b-3d4b84b9fb42" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:plus>\r
+         <!--Optional:-->\r
+         <operand1>?</operand1>\r
+         <!--Optional:-->\r
+         <operand2>?</operand2>\r
+      </ser:plus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plusRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ad7ee3c4-0522-4cc3-ba62-29487d280ff6" isOneWay="false" action="" name="sin" bindingOperationName="sin" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fd6c6e48-2f51-4a6a-8f14-5cd5239201db" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:sin>\r
+         <!--Optional:-->\r
+         <operand>?</operand>\r
+      </ser:sin>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/sinRequest"/></con:call></con:operation></con:interface><con:testSuite id="825192ae-65c4-407d-b830-831d2d07c1fb" name="CalculatorTests"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="c2678513-96e9-411f-9847-c53677f98880" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestTask2" searchProperties="true"><con:settings/><con:testStep type="request" id="37145d47-43dd-483a-8338-c5bb8f540d83" name="plus"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TrigonometricCalculatorWSPortBinding</con:interface><con:operation>plus</con:operation><con:request name="plus" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="20afa00b-2e36-4acf-b2dd-6db5453053ca"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://evbyminsd0900.minsk.epam.com:43278/epam-cdp-soap-calculator/trigonometricCalculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.soapui.services.cdp.epam.com/">\r
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>alice</wsse:Username>
+            <wsse:Password>alice</wsse:Password>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>\r
+      <ser:plus>\r
+         <!--Optional:-->\r
+         <operand1>${#TestCase#operand1}</operand1>\r
+         <!--Optional:-->\r
+         <operand2>${#TestCase#operand2}</operand2>\r
+      </ser:plus>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6226b4a1-fba2-4d35-860c-3022fab41c40" name="SOAP Response"/><con:assertion type="Valid HTTP Status Codes" id="ec8ec648-9a6f-4f18-ad20-c79150d8cb13" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Simple Contains" id="c179573e-1ce3-430e-a04f-a7de3d2045d3" name="Contains"><con:configuration><token>&lt;return>${#TestCase#summary1}&lt;/return></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Invalid HTTP Status Codes" id="d8fe3df7-3e56-4e65-aecf-949d70755823" name="Invalid HTTP Status Codes"><con:configuration><codes>404,500,401</codes></con:configuration></con:assertion><con:assertion type="Simple NotContains" id="271ae15e-c9fc-4a82-bfd5-a662a56cf134" name="Not Contains"><con:configuration><token>&lt;error></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.soapui.services.cdp.epam.com/TrigonometricCalculatorWS/plusRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:setupScript>
+</con:setupScript><con:properties><con:property><con:name>operand1</con:name><con:value>7.0</con:value></con:property><con:property><con:name>operand2</con:name><con:value>8.0</con:value></con:property><con:property><con:name>summary1</con:name><con:value>15.000</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
