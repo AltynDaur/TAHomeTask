@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Dauren_Altynbekov on 8/18/2015.
  */
-@FindBy(xpath = "//*[@id='google-feedback-wizard']")
+@FindBy(xpath = "//*[@id='dialog']")
 public class HelpDialogBlock extends HtmlElement {
 
     @FindBy(id = "search-box")

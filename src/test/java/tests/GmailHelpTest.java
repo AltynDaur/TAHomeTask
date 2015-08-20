@@ -5,10 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.GmailDraftsPage;
-import pages.GmailInboxPage;
-import pages.GmailSentPage;
-import pages.GmailStartPage;
+import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,11 +21,12 @@ public class GmailHelpTest {
     WebDriver driver = SingleWebDriver.getFirefoxDriverInstance();
     GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
+    GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
     @Test
     public void isLoginSuccessfully() {
         mailStartPage.openPage();
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
         inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
@@ -38,7 +36,8 @@ public class GmailHelpTest {
         inboxPage.openSettingsDialog();
         inboxPage.openHelpDialog();
         driver.switchTo().frame(driver.findElement(By.id("google-feedback-wizard")));
-        inboxPage.search(SEARCH_STRING);
-        Assert.assertEquals(inboxPage.isHaveThisOption(EXPECTED_OPTION), true);
+        helpFramePage.setDriver(driver);
+        helpFramePage.search(SEARCH_STRING);
+        Assert.assertEquals(helpFramePage.isHaveThisOption(EXPECTED_OPTION), true);
     }
 }

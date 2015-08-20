@@ -20,7 +20,6 @@ public class GmailInboxPage implements Page {
     private CreatingMailDialogBlock mailDialog;
     private SettingsDialogBlock settingsDialog;
     private HelpToolBarBlock helpToolBar;
-    private HelpDialogBlock helpDialog;
     private WebDriver driver;
 
     public GmailInboxPage(WebDriver driver) {
@@ -66,17 +65,6 @@ public class GmailInboxPage implements Page {
         settingsDialog.openHelp();
     }
 
-    public void search(String searchString) {
-        helpDialog.search(searchString);
-    }
-
-    public boolean isHaveThisOption(String expectedOption) {
-        return helpDialog.isHaveThisOption(expectedOption);
-    }
-
-    public WebElement getHelpDialog() {
-        return helpDialog;
-    }
 
     public String getCreatingDialogTitle() {
         return mailDialog.getTitle();
