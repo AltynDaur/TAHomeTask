@@ -4,6 +4,7 @@ import driver.SingleWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -18,15 +19,21 @@ public class GmailHelpTest {
     public static final String EXPECTED_OPTION = "Как сохранить черновик";
     public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
     public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
-    WebDriver driver = SingleWebDriver.getFirefoxDriverInstance();
+    WebDriver driver = SingleWebDriver.getDriver("ie");
     GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
+    @BeforeClass
+    public void config() {
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+    }
+
     @Test
     public void isLoginSuccessfully() {
         mailStartPage.openPage();
-        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+
         inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
