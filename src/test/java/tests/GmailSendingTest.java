@@ -7,8 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.GmailDraftsPage;
 import pages.GmailSentPage;
 import pages.GmailStartPage;
@@ -28,11 +27,20 @@ public class GmailSendingTest {
     public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
     public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
 
-    WebDriver driver = SingleWebDriver.getRemoteDriver();
-    GmailStartPage mailStartPage = new GmailStartPage(driver);
+    WebDriver driver;
+    GmailStartPage mailStartPage = new GmailStartPage();
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailDraftsPage draftsPage = new GmailDraftsPage();
     GmailSentPage sentPage = new GmailSentPage();
+
+    @Parameters("driver")
+    @BeforeClass
+    public void config(@Optional("firefox") String driverName) {
+        driver = SingleWebDriver.getDriver(driverName);
+        mailStartPage.setDriver(driver);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+    }
 
     @Test
     public void isLoginSuccessfully() {
@@ -85,7 +93,7 @@ public class GmailSendingTest {
         Assert.assertEquals(sentPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
-    @AfterTest(dependsOnMethods = {"checkSentMailInSentCategoory"})
+    @AfterTest
     public void closeGmail() {
         sentPage.logout();
         SingleWebDriver.closeBrowser();

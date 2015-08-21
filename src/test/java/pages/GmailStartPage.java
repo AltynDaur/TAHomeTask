@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,10 @@ public class GmailStartPage implements Page {
         PageFactory.initElements(this.driver, this);
     }
 
+    public GmailStartPage() {
+
+    }
+
     public void openPage() {
         this.driver.get(HTTP_GMAIL_COM);
     }
@@ -47,5 +52,10 @@ public class GmailStartPage implements Page {
         passwdInput.sendKeys(password);
         signInBtn.click();
         return new GmailInboxPage(this.driver);
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(this.driver, this);
     }
 }

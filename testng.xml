@@ -2,17 +2,24 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestAll">
 
-    <test name="allTests">
+    <test name="allTestsInFirefox">
+        <parameter name="driver" value="firefox"/>
         <classes>
-            <class name="tests.GmailSendingTest"/>
             <class name="tests.GmailHelpTest"/>
         </classes>
     </test>
 
-
-    <test name="smokeTest">
+    <test name="allTestsInChrome">
+        <parameter name="driver" value="chrome"/>
         <classes>
-            <class name="tests.GmailSendingTest"/>
+            <class name="tests.GmailHelpTest"/>
+        </classes>
+    </test>
+
+    <test name="allTestsInIE">
+        <parameter name="driver" value="ie"/>
+        <classes>
+            <class name="tests.GmailHelpTest"/>
         </classes>
     </test>
 

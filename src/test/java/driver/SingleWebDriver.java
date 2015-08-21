@@ -53,20 +53,19 @@ public class SingleWebDriver {
     }
 
     public static WebDriver getDriver(String driverName) {
-        if (driver == null) {
-            switch (driverName) {
-                case "firefox":
-                    driver = new FirefoxDriver();
-                    break;
-                case "chrome":
-                    createAndStartChromeService();
-                    driver = new ChromeDriver((ChromeDriverService) service);
-                    break;
-                case "ie":
-                    createAndStartIEService();
-                    driver = new InternetExplorerDriver((InternetExplorerDriverService) service);
-            }
+        switch (driverName) {
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "chrome":
+                createAndStartChromeService();
+                driver = new ChromeDriver((ChromeDriverService) service);
+                break;
+            case "ie":
+                createAndStartIEService();
+                driver = new InternetExplorerDriver((InternetExplorerDriverService) service);
         }
+
         return driver;
     }
 
