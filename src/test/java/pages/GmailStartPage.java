@@ -19,7 +19,7 @@ public class GmailStartPage implements Page {
     public static final String HTTP_GMAIL_COM = "http://gmail.com";
     private WebDriver driver;
 
-    @FindBy(id = "Email")
+    @FindBy(xpath = "//div[@id='gaia_firstform']//input[@id='Email']")
     private WebElement emailInput;
 
     @FindBy(id = "next")

@@ -58,39 +58,18 @@ public class SingleWebDriver {
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-                createAndStartChromeService();
-                driver = new ChromeDriver((ChromeDriverService) service);
+                System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
+                driver = new ChromeDriver();
                 break;
             case "ie":
-                createAndStartIEService();
-                driver = new InternetExplorerDriver((InternetExplorerDriverService) service);
+                System.setProperty("webdriver.ie.driver", IEDRIVER_PATH);
+                driver = new InternetExplorerDriver();
+                break;
+            default:
+                throw new AssertionError("Unsupported browser: " + driverName);
         }
 
         return driver;
-    }
-
-    public static void createAndStartChromeService() {
-        service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File(CHROMEDRIVER_PATH))
-                .usingAnyFreePort()
-                .build();
-        try {
-            service.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void createAndStartIEService() {
-        service = new InternetExplorerDriverService.Builder()
-                .usingDriverExecutable(new File(IEDRIVER_PATH))
-                .usingAnyFreePort()
-                .build();
-        try {
-            service.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
