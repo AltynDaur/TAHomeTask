@@ -27,7 +27,7 @@ public class GmailHelpTest {
     @Parameters("driver")
     @BeforeClass
     public void config(@Optional("firefox") String driverName) {
-        driver = SingleWebDriver.getDriver(driverName);
+        driver = SingleWebDriver.getDriver("ie");
         mailStartPage.setDriver(driver);
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
