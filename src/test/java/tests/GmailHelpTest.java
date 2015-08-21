@@ -1,6 +1,6 @@
 package tests;
 
-import driver.SingleWebDriver;
+import driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,20 +18,11 @@ public class GmailHelpTest {
     public static final String EXPECTED_OPTION = "Как сохранить черновик";
     public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
     public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
-    WebDriver driver;
-    GmailStartPage mailStartPage = new GmailStartPage();
+    WebDriver driver = Driver.getDriver();
+    GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
-
-    @Parameters("driver")
-    @BeforeClass
-    public void config(@Optional("firefox") String driverName) {
-        driver = SingleWebDriver.getDriver(driverName);
-        mailStartPage.setDriver(driver);
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
-    }
 
     @Test
     public void isLoginSuccessfully() {
@@ -44,8 +35,8 @@ public class GmailHelpTest {
     public void checkDraftHelp() {
         inboxPage.openSettingsDialog();
         inboxPage.openHelpDialog();
-        driver.switchTo().frame(driver.findElement(By.id("google-feedback-wizard")));
         helpFramePage.setDriver(driver);
+        driver.switchTo().frame(helpFramePage.getHelpDialog());
         helpFramePage.search(SEARCH_STRING);
         Assert.assertEquals(helpFramePage.isHaveThisOption(EXPECTED_OPTION), true);
     }
@@ -55,6 +46,6 @@ public class GmailHelpTest {
         helpFramePage.closeHelpFrame();
         driver.switchTo().defaultContent();
         inboxPage.logout();
-        SingleWebDriver.closeBrowser();
+        Driver.closeBrowser();
     }
 }

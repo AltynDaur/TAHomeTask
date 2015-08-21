@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.blocks.HelpDialogBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
@@ -13,6 +14,9 @@ public class GmailHelpFramePage {
 
     private WebDriver driver;
     private HelpDialogBlock helpDialog;
+
+    @FindBy(id = "google-feedback-wizard")
+    private WebElement helpFrame;
 
     public GmailHelpFramePage(WebDriver driver) {
         this.driver = driver;
@@ -32,7 +36,7 @@ public class GmailHelpFramePage {
     }
 
     public WebElement getHelpDialog() {
-        return helpDialog;
+        return helpFrame;
     }
 
     public void setDriver(WebDriver driver) {
