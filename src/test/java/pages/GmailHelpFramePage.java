@@ -39,4 +39,8 @@ public class GmailHelpFramePage {
         this.driver = driver;
         PageFactory.initElements(new HtmlElementDecorator(driver), this);
     }
+
+    public void closeHelpFrame() {
+        helpDialog.closeHelpDialog();
+    }
 }

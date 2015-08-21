@@ -42,7 +42,6 @@ public class GmailSentPage implements Page {
 
     public void logout() {
         header.openAccountManagementDialog();
-        driver.manage().timeouts().setScriptTimeout(1, TimeUnit.SECONDS);
         header.logout();
     }
 }

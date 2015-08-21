@@ -20,6 +20,7 @@ public class GmailInboxPage implements Page {
     private CreatingMailDialogBlock mailDialog;
     private SettingsDialogBlock settingsDialog;
     private HelpToolBarBlock helpToolBar;
+    private HeaderBlock header;
     private WebDriver driver;
 
     public GmailInboxPage(WebDriver driver) {
@@ -68,5 +69,15 @@ public class GmailInboxPage implements Page {
 
     public String getCreatingDialogTitle() {
         return mailDialog.getTitle();
+    }
+
+    public void logout() {
+        header.openAccountManagementDialog();
+        driver.manage().timeouts().setScriptTimeout(1, TimeUnit.SECONDS);
+        header.logout();
+    }
+
+    public WebElement getHeader() {
+        return header;
     }
 }

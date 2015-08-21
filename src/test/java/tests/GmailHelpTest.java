@@ -4,10 +4,7 @@ import driver.SingleWebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
 
 import java.util.concurrent.TimeUnit;
@@ -51,5 +48,13 @@ public class GmailHelpTest {
         helpFramePage.setDriver(driver);
         helpFramePage.search(SEARCH_STRING);
         Assert.assertEquals(helpFramePage.isHaveThisOption(EXPECTED_OPTION), true);
+    }
+
+    @AfterTest
+    public void closeGmail() {
+        helpFramePage.closeHelpFrame();
+        driver.switchTo().defaultContent();
+        inboxPage.logout();
+        SingleWebDriver.closeBrowser();
     }
 }

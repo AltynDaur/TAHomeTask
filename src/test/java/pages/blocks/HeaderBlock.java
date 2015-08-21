@@ -12,10 +12,10 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@role='banner']")
 public class HeaderBlock extends HtmlElement {
 
-    @FindBy(xpath = "//div[@role='banner']//a[@class='gb_8 gb_Ja gb_M gb_Ea']")
+    @FindBy(xpath = "//div[@role='banner']//div[@class='gb_Pa gb_Kb gb_Nd gb_R']//a[@class='gb_b gb_Na gb_R gb_Ja']")
     private WebElement accountManagementLink;
 
-    @FindBy(xpath = "//div[@role='banner']//a[@class='gb_Qc gb_Xc gb_ta']")
+    @FindBy(xpath = "//div[@role='banner']//div[@class='gb_Ua gb_ga']//a[@class='gb_0c gb_7c gb_xa']")
     private WebElement logOutBtn;
 
     public void openAccountManagementDialog() {

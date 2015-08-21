@@ -20,6 +20,9 @@ public class HelpDialogBlock extends HtmlElement {
     @FindBy(xpath = "//ul[@role = 'listbox']//div[@class='ghp-autocomplete-label']")
     private List<WebElement> optionsList;
 
+    @FindBy(xpath = "//button[@class='ghp-header-closeIcon ghp-closeIcon']")
+    private WebElement closeBtn;
+
     public boolean isHaveThisOption(String option) {
         boolean isHaveOption = false;
         isHaveOption = optionsList.iterator().next().getText().equalsIgnoreCase(option);
@@ -32,5 +35,9 @@ public class HelpDialogBlock extends HtmlElement {
 
     public void search(String searchString) {
         searchBox.sendKeys(searchString);
+    }
+
+    public void closeHelpDialog() {
+        closeBtn.click();
     }
 }
