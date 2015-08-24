@@ -34,8 +34,7 @@ public class GmailHelpTest {
     @Test(dependsOnMethods = "isLoginSuccessfully")
     public void checkDraftHelp() {
         inboxPage.openSettingsDialog();
-        inboxPage.openHelpDialog();
-        helpFramePage.setDriver(driver);
+        helpFramePage = inboxPage.openHelpDialog();
         driver.switchTo().frame(helpFramePage.getHelpDialog());
         helpFramePage.search(SEARCH_STRING);
         Assert.assertEquals(helpFramePage.isHaveThisOption(EXPECTED_OPTION), true);

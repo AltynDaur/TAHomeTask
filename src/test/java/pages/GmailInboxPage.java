@@ -62,8 +62,9 @@ public class GmailInboxPage implements Page {
         helpToolBar.openSettingsDialog();
     }
 
-    public void openHelpDialog() {
+    public GmailHelpFramePage openHelpDialog() {
         settingsDialog.openHelp();
+        return new GmailHelpFramePage(driver);
     }
 
 
