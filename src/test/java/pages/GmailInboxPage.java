@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.blocks.*;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
@@ -19,7 +18,7 @@ public class GmailInboxPage implements Page {
     private MailsListBlock mailsList;
     private CreatingMailDialogBlock mailDialog;
     private SettingsDialogBlock settingsDialog;
-    private HelpToolBarBlock helpToolBar;
+    private ToolBarBlock helpToolBar;
     private HeaderBlock header;
     private WebDriver driver;
 

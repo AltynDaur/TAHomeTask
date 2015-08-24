@@ -26,18 +26,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Driver {
 
-    public static final String CHROMEDRIVER_PATH = "chromedriver.exe";
-    public static final String IEDRIVER_PATH = "IEDriverServer.exe";
     private static WebDriver driver;
 
     private Driver() {
-    }
-
-    public static WebDriver getFirefoxDriverInstance() {
-        if (driver == null) {
-            driver = new FirefoxDriver();
-        }
-        return driver;
     }
 
     public static void closeBrowser() {
@@ -50,41 +41,30 @@ public class Driver {
         if (driver == null) {
             init();
         }
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
         return driver;
     }
 
     private static void init() {
-        Properties prop = new Properties();
-        FileInputStream propFile;
-        try {
-            propFile = new FileInputStream("test.properties");
-            prop.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-        Enumeration<String> enums = (Enumeration<String>) prop.propertyNames();
-        while (enums.hasMoreElements()) {
-            String key = enums.nextElement();
-            System.setProperty(key, prop.getProperty(key));
-        }
+        TestProperties.getProperties();
+
         switch (System.getProperty("browser")) {
             case "firefox":
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
+                System.setProperty("webdriver.chrome.driver", System.getProperty("chromeDriverPath"));
                 driver = new ChromeDriver();
                 break;
             case "ie":
-                System.setProperty("webdriver.ie.driver", IEDRIVER_PATH);
+                System.setProperty("webdriver.ie.driver", System.getProperty("IEDriverPath"));
                 driver = new InternetExplorerDriver();
                 break;
             default:
                 throw new AssertionError("Unsupported browser: " + System.getProperty("browser"));
         }
-
+        driver.manage().timeouts().implicitlyWait(Long.parseLong(System.getProperty("implicityWait")), TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(Long.parseLong(System.getProperty("pageLoadWait")), TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(Long.parseLong(System.getProperty("scriptWait")), TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 }

@@ -1,8 +1,13 @@
 package pages;
 
+import driver.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
 import pages.blocks.EditingMailMainBlock;
+import pages.blocks.ToolBarBlock;
 import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
@@ -17,6 +22,7 @@ public class GmailDraftsPage implements Page {
     private MainMenuBlock mainMenu;
     private MailsListBlock mailsList;
     private EditingMailMainBlock mailMainBlock;
+    private ToolBarBlock toolBar;
 
     public GmailDraftsPage(WebDriver driver) {
         this.driver = driver;
@@ -64,4 +70,17 @@ public class GmailDraftsPage implements Page {
         mainMenu.goToSent();
         return new GmailSentPage(this.driver);
     }
+
+    public int getMailListSizeWithTheme(String mailTheme) {
+        return mailsList.getMailsWithTheme(mailTheme).size();
+    }
+
+    public void goBackToMailsList() {
+        toolBar.backToMailList();
+    }
+
+    public void goToDrafts() {
+        mainMenu.goToDrafts();
+    }
+
 }

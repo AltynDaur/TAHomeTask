@@ -3,6 +3,7 @@ package tests;
 import driver.Driver;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.GmailDraftsPage;
@@ -21,20 +22,16 @@ public class GmailSendingTest {
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
-    public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
-    public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
-
-    WebDriver driver;
-    GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailDraftsPage draftsPage = new GmailDraftsPage();
     GmailSentPage sentPage = new GmailSentPage();
+    private int sizeBeforeSending = 0;
 
     @Test
     public void isLoginSuccessfully() {
-        mailStartPage.openPage();
-        inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
-        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        inboxPage = GmailTestsUtil.login();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
+        wait.withTimeout(7, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
@@ -49,6 +46,7 @@ public class GmailSendingTest {
         inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
         inboxPage.closeNewMailDialog();
         draftsPage = inboxPage.goToDrafts();
+        sizeBeforeSending = draftsPage.getMailListSizeWithTheme(MAIL_THEME);
         Assert.assertEquals(draftsPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
@@ -69,10 +67,13 @@ public class GmailSendingTest {
         Assert.assertEquals(draftsPage.getMailBodyFromDialog(), MAIL_BODY);
     }
 
-    @Test(dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"}, expectedExceptions = NoSuchElementException.class)
+    @Test(dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"})
     public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
-        Assert.assertNotEquals(draftsPage.getLastMailThemeInCategory(), null);
+        draftsPage.goBackToMailsList();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
+        wait.withTimeout(5, TimeUnit.SECONDS);
+        Assert.assertNotEquals(sizeBeforeSending, draftsPage.getMailListSizeWithTheme(MAIL_THEME), "Size of drafts didn't changed");
     }
 
     @Test(dependsOnMethods = {"sentMailFromDraft"})
@@ -81,7 +82,7 @@ public class GmailSendingTest {
         Assert.assertEquals(sentPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
-    @AfterTest
+    @AfterSuite
     public void closeGmail() {
         sentPage.logout();
         Driver.closeBrowser();

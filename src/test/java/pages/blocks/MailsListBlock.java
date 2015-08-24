@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
  */
@@ -17,6 +20,9 @@ public class MailsListBlock extends HtmlElement {
     @FindBy(xpath = "//table[@class='F cf zt']//tr[1]")
     private WebElement lastMailInCategoryLink;
 
+    @FindBy(xpath = "//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]")
+    private List<WebElement> mailThemesList;
+
     public String getLastMailThemeInCategory() {
         return lastMailThemeInCategoryLabel.getText();
     }
@@ -27,5 +33,15 @@ public class MailsListBlock extends HtmlElement {
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return null;
+    }
+
+    public List<WebElement> getMailsWithTheme(String mailTheme) {
+        List<WebElement> requiredWebElements = new ArrayList<>();
+        for (int i = 0; i < mailThemesList.size(); i++) {
+            if (mailThemesList.get(i).getText().equals(mailTheme)) {
+                requiredWebElements.add(mailThemesList.get(i));
+            }
+        }
+        return requiredWebElements;
     }
 }

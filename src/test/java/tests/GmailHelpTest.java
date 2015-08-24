@@ -16,22 +16,17 @@ public class GmailHelpTest {
 
     public static final String SEARCH_STRING = "черно";
     public static final String EXPECTED_OPTION = "Как сохранить черновик";
-    public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
-    public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
     WebDriver driver = Driver.getDriver();
-    GmailStartPage mailStartPage = new GmailStartPage(driver);
     GmailInboxPage inboxPage = new GmailInboxPage();
     GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
 
-    @Test
-    public void isLoginSuccessfully() {
-        mailStartPage.openPage();
-        inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
-        Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
+    @BeforeClass
+    public void prepareTest() {
+        inboxPage = GmailTestsUtil.login();
     }
 
-    @Test(dependsOnMethods = "isLoginSuccessfully")
+    @Test
     public void checkDraftHelp() {
         inboxPage.openSettingsDialog();
         helpFramePage = inboxPage.openHelpDialog();

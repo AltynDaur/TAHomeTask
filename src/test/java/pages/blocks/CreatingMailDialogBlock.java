@@ -4,7 +4,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.element.TextInput;
 
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
@@ -13,16 +15,16 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 public class CreatingMailDialogBlock extends HtmlElement {
 
     @FindBy(xpath = "//div[@class='AD']//textarea[@name='to']")
-    private WebElement newMailAddressInput;
+    private TextInput newMailAddressInput;
 
     @FindBy(xpath = "//div[@class='AD']//input[@class='aoT']")
-    private WebElement newMailThemeInput;
+    private TextInput newMailThemeInput;
 
     @FindBy(xpath = "//div[@class='AD']//div[@role='textbox']")
     private WebElement newMailBodyInput;
 
     @FindBy(className = "Ha")
-    private WebElement closeNewMailDialogBtn;
+    private Button closeNewMailDialogBtn;
 
     @FindBy(xpath = "//div[@class='AD']//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
     private WebElement sendBtnInDialog;
