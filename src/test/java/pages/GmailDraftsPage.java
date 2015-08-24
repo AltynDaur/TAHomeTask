@@ -6,11 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.blocks.EditingMailMainBlock;
 import pages.blocks.ToolBarBlock;
 import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
@@ -43,7 +46,7 @@ public class GmailDraftsPage implements Page {
 
 
     public String getLastMailThemeInCategory() {
-        return mailsList.getLastMailThemeInCategory();
+        return mailsList.getLastMailThemeInCategory().getText();
     }
 
     public void openLastMailInCategory() {
@@ -77,10 +80,6 @@ public class GmailDraftsPage implements Page {
 
     public void goBackToMailsList() {
         toolBar.backToMailList();
-    }
-
-    public void goToDrafts() {
-        mainMenu.goToDrafts();
     }
 
 }

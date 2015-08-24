@@ -23,8 +23,8 @@ public class MailsListBlock extends HtmlElement {
     @FindBy(xpath = "//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]")
     private List<WebElement> mailThemesList;
 
-    public String getLastMailThemeInCategory() {
-        return lastMailThemeInCategoryLabel.getText();
+    public WebElement getLastMailThemeInCategory() {
+        return lastMailThemeInCategoryLabel;
     }
 
     public void openLastMailInCategory() {

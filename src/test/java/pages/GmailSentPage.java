@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import pages.blocks.HeaderBlock;
 import pages.blocks.MailsListBlock;
@@ -36,7 +37,7 @@ public class GmailSentPage implements Page {
         return driver.getCurrentUrl();
     }
 
-    public String getLastMailThemeInCategory() {
+    public WebElement getLastMailThemeInCategory() {
         return mailsList.getLastMailThemeInCategory();
     }
 

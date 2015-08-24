@@ -1,8 +1,10 @@
 package tests;
 
 import driver.Driver;
+import org.junit.Ignore;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -31,7 +33,7 @@ public class GmailSendingTest {
     public void isLoginSuccessfully() {
         inboxPage = GmailTestsUtil.login();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
-        wait.withTimeout(7, TimeUnit.SECONDS);
+        wait.withTimeout(50, TimeUnit.SECONDS);
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
@@ -71,18 +73,23 @@ public class GmailSendingTest {
     public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
         draftsPage.goBackToMailsList();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
-        wait.withTimeout(5, TimeUnit.SECONDS);
+        try {
+            Thread.sleep(15000);//TODO need to remove this
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertNotEquals(sizeBeforeSending, draftsPage.getMailListSizeWithTheme(MAIL_THEME), "Size of drafts didn't changed");
     }
 
     @Test(dependsOnMethods = {"sentMailFromDraft"})
     public void checkSentMailInSentCategoory() {
         sentPage = draftsPage.goToSent();
-        Assert.assertEquals(sentPage.getLastMailThemeInCategory(), MAIL_THEME);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
+        wait.until(ExpectedConditions.elementToBeClickable(sentPage.getLastMailThemeInCategory()));
+        Assert.assertEquals(sentPage.getLastMailThemeInCategory().getText(), MAIL_THEME);
     }
 
-    @AfterSuite
+
     public void closeGmail() {
         sentPage.logout();
         Driver.closeBrowser();
