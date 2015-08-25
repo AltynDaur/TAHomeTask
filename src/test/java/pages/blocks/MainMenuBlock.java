@@ -25,6 +25,9 @@ public class MainMenuBlock extends HtmlElement{
     @FindBy(xpath = "//a[contains(@href,'https://mail.google.com/mail/#sent')]")
     private WebElement sentLink;
 
+    @FindBy(xpath = "//a[contains(@href,'https://mail.google.com/mail/#inbox')]")
+    private WebElement inboxLink;
+
     public void startNewMail(){
         newMailBtn.click();
 
@@ -45,5 +48,9 @@ public class MainMenuBlock extends HtmlElement{
     public WebElement getNewMailBtn() {
 
         return newMailBtn;
+    }
+
+    public void goToInbox() {
+        inboxLink.click();
     }
 }

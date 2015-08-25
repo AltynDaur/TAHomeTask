@@ -30,26 +30,25 @@ public class GmailSendingTest {
     GmailSentPage sentPage = new GmailSentPage();
     private int sizeBeforeSending = 0;
 
-    @BeforeClass(groups = {"criticalPath", "negativeTests"})
+    @BeforeSuite(groups = {"sendingTests"})
     public void login() {
         inboxPage = GmailTestsUtil.login();
     }
 
-    @Test(groups = "criticalPath")
+    @Test(groups = "sendingTests")
     public void isLoginSuccessfully() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
-        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#inbox"));
+        inboxPage.waitForLoadingPage();
         Assert.assertTrue(inboxPage.getCurrentUrl().startsWith("https://mail.google.com/mail/#inbox"));
     }
 
-    @Test(groups = "criticalPath")
+    @Test(groups = "sendingTests")
     public void oneCanCreateNewMail() {
         inboxPage.startNewMail();
         inboxPage.waitForNewMailDialogTitleAppering();
         Assert.assertEquals(inboxPage.getCreatingDialogTitle(), "Новое сообщение");
     }
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"oneCanCreateNewMail"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"oneCanCreateNewMail"})
     public void saveNewMailToDraft() {
         inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
         inboxPage.closeNewMailDialog();
@@ -58,24 +57,24 @@ public class GmailSendingTest {
         Assert.assertEquals(draftsPage.getLastMailThemeInCategory(), MAIL_THEME);
     }
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"saveNewMailToDraft"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"saveNewMailToDraft"})
     public void checkAddressNewMailInDraft() {
         draftsPage.openLastMailInCategory();
         Assert.assertEquals(draftsPage.getMailAddressFromDialog(), MAIL_ADDRESS);
     }
 
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"checkAddressNewMailInDraft"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"checkAddressNewMailInDraft"})
     public void checkThemeNewMailInDraft() {
         Assert.assertEquals(draftsPage.getMailThemeFromDialog(), MAIL_THEME);
     }
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"checkThemeNewMailInDraft"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"checkThemeNewMailInDraft"})
     public void checkBodyNewMailInDraft() {
         Assert.assertEquals(draftsPage.getMailBodyFromDialog(), MAIL_BODY);
     }
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"checkAddressNewMailInDraft", "checkThemeNewMailInDraft", "checkBodyNewMailInDraft"})
     public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
         draftsPage.goBackToMailsList();
@@ -84,15 +83,16 @@ public class GmailSendingTest {
         Assert.assertNotEquals(sizeBeforeSending, draftsPage.getMailListSizeWithTheme(MAIL_THEME), "Size of drafts didn't changed");
     }
 
-    @Test(groups = "criticalPath", dependsOnMethods = {"sentMailFromDraft"})
+    @Test(groups = "sendingTests", dependsOnMethods = {"sentMailFromDraft"})
     public void checkSentMailInSentCategoory() {
         sentPage = draftsPage.goToSent();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
         wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#sent"));
         Assert.assertEquals(sentPage.getLastMailThemeInCategory().getText(), MAIL_THEME);
+        inboxPage = sentPage.goToInbox();
     }
 
-    @Test(groups = "negativeTests")
+    @Test(groups = "sendingTests")
     public void createNewMailWithoutAddress() {
         inboxPage.startNewMail();
         inboxPage.writeNewMail("", MAIL_THEME, MAIL_BODY);

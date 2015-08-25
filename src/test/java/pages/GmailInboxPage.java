@@ -109,4 +109,9 @@ public class GmailInboxPage implements Page {
             }
         });
     }
+
+    public void waitForLoadingPage() {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
+        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#inbox"));
+    }
 }

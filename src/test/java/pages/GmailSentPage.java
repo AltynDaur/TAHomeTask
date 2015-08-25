@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import pages.blocks.HeaderBlock;
 import pages.blocks.MailsListBlock;
+import pages.blocks.MainMenuBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ public class GmailSentPage implements Page {
 
     private MailsListBlock mailsList;
     private HeaderBlock header;
+    private MainMenuBlock mainMenu;
 
     public GmailSentPage(WebDriver driver) {
         this.driver = driver;
@@ -44,5 +46,10 @@ public class GmailSentPage implements Page {
     public void logout() {
         header.openAccountManagementDialog();
         header.logout();
+    }
+
+    public GmailInboxPage goToInbox() {
+        mainMenu.goToInbox();
+        return new GmailInboxPage(this.driver);
     }
 }

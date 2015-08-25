@@ -21,12 +21,12 @@ public class GmailHelpTest {
     GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
 
-    @BeforeClass(groups = {"criticalPath", "negativeTests"})
+    @BeforeClass(groups = "userHelpTests")
     public void prepareTest() {
         inboxPage = GmailTestsUtil.login();
     }
 
-    @Test(groups = "criticalPath", enabled = false)
+    @Test(groups = "userHelpTests", enabled = false)
     public void checkDraftHelp() {
         inboxPage.openSettingsDialog();
         helpFramePage = inboxPage.openHelpDialog();

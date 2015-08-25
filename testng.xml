@@ -2,25 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="criticalPath">
 
-    <test name="negativeTests" verbose="2">
-        <groups>
-            <run>
-                <include name="negativeTests"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="tests.GmailSendingTest"/>
-        </classes>
-    </test>
+
     <test name="criticalPath">
         <groups>
             <run>
-                <include name="criticalPath"/>
+                <include name="sendingTests"/>
+                <include name="userHelpTests"/>
             </run>
         </groups>
         <classes>
             <class name="tests.GmailSendingTest"/>
+            <class name="tests.GmailHelpTest"/>
         </classes>
     </test>
+
 </suite>
 
