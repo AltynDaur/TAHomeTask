@@ -1,11 +1,14 @@
 package pages;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.blocks.EditingMailMainBlock;
 import pages.blocks.ToolBarBlock;
@@ -91,5 +94,19 @@ public class GmailDraftsPage implements Page {
     public List<WebElement> getMailList() {
 
         return mailsList.getMailList();
+    }
+
+    public void waitForMailCountChanging() {
+        int numberOfMailLabels = driver
+                .findElements(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]"))
+                .size();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(new Predicate<WebDriver>() {
+            @Override
+            public boolean apply(WebDriver driver) {
+                List<WebElement> mailLabelList = driver.findElements(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]"));
+                return numberOfMailLabels != mailLabelList.size();
+            }
+        });
     }
 }

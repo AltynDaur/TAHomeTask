@@ -62,9 +62,9 @@ public class Driver {
             default:
                 throw new AssertionError("Unsupported browser: " + System.getProperty("browser"));
         }
-        driver.manage().timeouts().implicitlyWait(Long.parseLong(System.getProperty("implicityWait")), TimeUnit.SECONDS);
+       /* driver.manage().timeouts().implicitlyWait(Long.parseLong(System.getProperty("implicityWait")), TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(Long.parseLong(System.getProperty("pageLoadWait")), TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(Long.parseLong(System.getProperty("scriptWait")), TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(Long.parseLong(System.getProperty("scriptWait")), TimeUnit.SECONDS);*/
         driver.manage().window().maximize();
     }
 }

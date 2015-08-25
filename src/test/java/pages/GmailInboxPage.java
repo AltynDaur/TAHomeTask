@@ -1,9 +1,13 @@
 package pages;
 
+import com.google.common.base.Predicate;
 import driver.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.blocks.*;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
@@ -22,6 +26,7 @@ public class GmailInboxPage implements Page {
     private SettingsDialogBlock settingsDialog;
     private ToolBarBlock helpToolBar;
     private HeaderBlock header;
+    private ErrorMessageBlock errorMessage;
     private WebDriver driver;
 
     public GmailInboxPage(WebDriver driver) {
@@ -43,6 +48,7 @@ public class GmailInboxPage implements Page {
 
     public void startNewMail() {
         mainMenu.startNewMail();
+
     }
 
     public void writeNewMail(String mailAddress, String mailTheme, String mailBody) {
@@ -74,7 +80,6 @@ public class GmailInboxPage implements Page {
 
     public void logout() {
         header.openAccountManagementDialog();
-        driver.manage().timeouts().setScriptTimeout(1, TimeUnit.SECONDS);
         header.logout();
     }
 
@@ -82,4 +87,26 @@ public class GmailInboxPage implements Page {
         return header;
     }
 
+    public void sentNewMail() {
+        mailDialog.sendMailFromDialog();
+    }
+
+    public WebElement getErrorMessage() {
+        return errorMessage.getErrorMessage();
+    }
+
+    public void closeErrorMessage() {
+        errorMessage.closeErrorMessage();
+    }
+
+    public void waitForNewMailDialogTitleAppering() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(new Predicate<WebDriver>() {
+            @Override
+            public boolean apply(WebDriver driver) {
+                String newMailDialogTitle = driver.findElement(By.xpath("//div[@class='aYF']")).getText();
+                return newMailDialogTitle.equals("Новое сообщение");
+            }
+        });
+    }
 }

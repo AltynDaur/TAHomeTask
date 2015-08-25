@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestAll">
+<suite name="criticalPath">
 
-    <test name="allTestsInFirefox">
-        <parameter name="driver" value="firefox"/>
+    <test name="negativeTests" verbose="2">
+        <groups>
+            <run>
+                <include name="negativeTests"/>
+            </run>
+        </groups>
         <classes>
-            <class name="tests.GmailHelpTest"/>
+            <class name="tests.GmailSendingTest"/>
         </classes>
     </test>
-
-    <test name="allTestsInChrome">
-        <parameter name="driver" value="chrome"/>
+    <test name="criticalPath">
+        <groups>
+            <run>
+                <include name="criticalPath"/>
+            </run>
+        </groups>
         <classes>
-            <class name="tests.GmailHelpTest"/>
+            <class name="tests.GmailSendingTest"/>
         </classes>
     </test>
-
-    <test name="allTestsInIE">
-        <parameter name="driver" value="ie"/>
-        <classes>
-            <class name="tests.GmailHelpTest"/>
-        </classes>
-    </test>
-
 </suite>
+

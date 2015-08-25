@@ -1,9 +1,12 @@
 package pages.blocks;
 
+import driver.Driver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 /**
@@ -24,6 +27,7 @@ public class MainMenuBlock extends HtmlElement{
 
     public void startNewMail(){
         newMailBtn.click();
+
     }
 
     public void goToDrafts(){

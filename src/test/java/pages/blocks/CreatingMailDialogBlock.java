@@ -54,4 +54,8 @@ public class CreatingMailDialogBlock extends HtmlElement {
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         return null;
     }
+
+    public WebElement getTitleLabel() {
+        return dialogTitle;
+    }
 }

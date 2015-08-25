@@ -51,6 +51,8 @@ public class GmailStartPage implements Page {
     public GmailInboxPage login(String email, String password) {
         emailInput.sendKeys(email);
         nextToPasswdBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(passwdInput));
         passwdInput.sendKeys(password);
         signInBtn.click();
         return new GmailInboxPage(this.driver);
