@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/12/2015.
  */
-public class GmailSendingTest {
+public class GmailSendingTest extends AbstractTest {
 
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
@@ -30,14 +30,8 @@ public class GmailSendingTest {
     GmailSentPage sentPage = new GmailSentPage();
     private int sizeBeforeSending = 0;
 
-    @BeforeSuite(groups = {"sendingTests"})
-    public void login() {
-        inboxPage = GmailTestsUtil.login();
-    }
-
     @Test(groups = "sendingTests")
     public void isLoginSuccessfully() {
-        inboxPage.waitForLoadingPage();
         Assert.assertTrue(inboxPage.getCurrentUrl().startsWith("https://mail.google.com/mail/#inbox"));
     }
 
@@ -88,8 +82,9 @@ public class GmailSendingTest {
         sentPage = draftsPage.goToSent();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
         wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#sent"));
-        Assert.assertEquals(sentPage.getLastMailThemeInCategory().getText(), MAIL_THEME);
+        String lastThemeInList = sentPage.getLastMailThemeInCategory().getText();
         inboxPage = sentPage.goToInbox();
+        Assert.assertEquals(lastThemeInList, MAIL_THEME);
     }
 
     @Test(groups = "sendingTests")
@@ -97,16 +92,12 @@ public class GmailSendingTest {
         inboxPage.startNewMail();
         inboxPage.writeNewMail("", MAIL_THEME, MAIL_BODY);
         inboxPage.sentNewMail();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-        wait.until(ExpectedConditions.visibilityOf(inboxPage.getErrorMessage()));
-        Assert.assertEquals(inboxPage.getErrorMessage().getText(), "Укажите как минимум одного получателя.");
+        inboxPage.waitForErrorMessageAppering();
+        String errorMessageText = inboxPage.getErrorMessage().getText();
         inboxPage.closeErrorMessage();
         inboxPage.closeNewMailDialog();
+        Assert.assertEquals(errorMessageText, "Укажите как минимум одного получателя.");
+
     }
 
-    @AfterSuite
-    public void closeGmail() {
-        sentPage.logout();
-        Driver.closeBrowser();
-    }
 }
