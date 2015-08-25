@@ -13,6 +13,7 @@ import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -82,4 +83,13 @@ public class GmailDraftsPage implements Page {
         toolBar.backToMailList();
     }
 
+    public void goToDrafts() {
+        mainMenu.goToDrafts();
+    }
+
+
+    public List<WebElement> getMailList() {
+
+        return mailsList.getMailList();
+    }
 }

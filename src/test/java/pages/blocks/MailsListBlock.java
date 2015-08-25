@@ -44,4 +44,8 @@ public class MailsListBlock extends HtmlElement {
         }
         return requiredWebElements;
     }
+
+    public List<WebElement> getMailList() {
+        return mailThemesList;
+    }
 }

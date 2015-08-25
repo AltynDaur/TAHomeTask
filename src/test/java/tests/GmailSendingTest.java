@@ -5,6 +5,7 @@ import org.junit.Ignore;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -33,7 +34,7 @@ public class GmailSendingTest {
     public void isLoginSuccessfully() {
         inboxPage = GmailTestsUtil.login();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
-        wait.withTimeout(50, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#inbox"));
         Assert.assertEquals(inboxPage.getCurrentUrl(), "https://mail.google.com/mail/#inbox");
     }
 
@@ -73,8 +74,9 @@ public class GmailSendingTest {
     public void sentMailFromDraft() {
         draftsPage.sendMailFromDialog();
         draftsPage.goBackToMailsList();
+        draftsPage.goToDrafts();
         try {
-            Thread.sleep(15000);//TODO need to remove this
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -84,8 +86,8 @@ public class GmailSendingTest {
     @Test(dependsOnMethods = {"sentMailFromDraft"})
     public void checkSentMailInSentCategoory() {
         sentPage = draftsPage.goToSent();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
-        wait.until(ExpectedConditions.elementToBeClickable(sentPage.getLastMailThemeInCategory()));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#sent"));
         Assert.assertEquals(sentPage.getLastMailThemeInCategory().getText(), MAIL_THEME);
     }
 

@@ -1,8 +1,10 @@
 package pages;
 
+import driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.blocks.*;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
@@ -53,7 +55,6 @@ public class GmailInboxPage implements Page {
 
     public GmailDraftsPage goToDrafts() {
         mainMenu.goToDrafts();
-        driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
         return new GmailDraftsPage(this.driver);
     }
 
@@ -80,4 +81,5 @@ public class GmailInboxPage implements Page {
     public WebElement getHeader() {
         return header;
     }
+
 }
