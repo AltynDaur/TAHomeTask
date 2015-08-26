@@ -2,20 +2,11 @@ package tests;
 
 import driver.Driver;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
 import pages.GmailDraftsPage;
 import pages.GmailSentPage;
 import pages.GmailStartPage;
 import pages.GmailInboxPage;
-
-import java.util.concurrent.TimeUnit;
 
 
 /**

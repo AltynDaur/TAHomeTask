@@ -2,17 +2,13 @@ package tests;
 
 import driver.Driver;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
 import pages.*;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dauren_Altynbekov on 8/18/2015.
  */
+
 public class GmailHelpTest extends AbstractTest {
 
     public static final String SEARCH_STRING = "черно";

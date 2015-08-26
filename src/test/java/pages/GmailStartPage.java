@@ -1,5 +1,6 @@
 package pages;
 
+import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/12/2015.
  */
+@DefaultUrl("http://gmail.com")
 public class GmailStartPage extends Page {
 
     public static final String HTTP_GMAIL_COM = "http://gmail.com";

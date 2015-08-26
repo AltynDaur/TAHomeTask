@@ -3,6 +3,7 @@ package pages;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import driver.Driver;
+import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
  */
+@DefaultUrl("https://mail.google.com/mail/#drafts")
 public class GmailDraftsPage extends Page {
     public static final String GMAIL_DRAFTS_PAGE = "https://mail.google.com/mail/#drafts";
 

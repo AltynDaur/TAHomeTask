@@ -1,5 +1,6 @@
 package pages;
 
+import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/14/2015.
  */
+@DefaultUrl("https://mail.google.com/mail/#sent")
 public class GmailSentPage extends Page {
 
     public static final String GMAIL_SENT_PAGE = "https://mail.google.com/mail/#sent";
