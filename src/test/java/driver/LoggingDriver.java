@@ -1,9 +1,7 @@
 package driver;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +9,7 @@ import java.util.Set;
 /**
  * Created by Dauren_Altynbekov on 8/26/2015.
  */
-public class LoggingDriver implements WebDriver {
+public class LoggingDriver implements WebDriver, JavascriptExecutor, TakesScreenshot {
 
     private static Logger logger = Logger.getLogger(LoggingDriver.class);
     private WebDriver driver;
@@ -88,5 +86,20 @@ public class LoggingDriver implements WebDriver {
     @Override
     public Options manage() {
         return driver.manage();
+    }
+
+    @Override
+    public Object executeScript(String s, Object... objects) {
+        return ((JavascriptExecutor) driver).executeScript(s, objects);
+    }
+
+    @Override
+    public Object executeAsyncScript(String s, Object... objects) {
+        return ((JavascriptExecutor) driver).executeAsyncScript(s, objects);
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
+        return ((TakesScreenshot) driver).getScreenshotAs(outputType);
     }
 }
