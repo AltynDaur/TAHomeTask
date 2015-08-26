@@ -15,17 +15,17 @@ import pages.GmailStartPage;
 public abstract class AbstractTest {
     public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
     public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
-    private static WebDriver driver;
+    protected WebDriver driver;
 
 
-    public static void login() {
+    public void login() {
         GmailStartPage mailStartPage = new GmailStartPage(driver);
         mailStartPage.openPage();
         mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         waitForLoadingPage();
     }
 
-    private static void waitForLoadingPage() {
+    private void waitForLoadingPage() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#inbox"));
     }

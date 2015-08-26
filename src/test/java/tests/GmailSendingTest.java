@@ -27,7 +27,7 @@ public class GmailSendingTest extends AbstractTest {
     public static final String MAIL_THEME = "Nice test";
     public static final String MAIL_BODY = "You're the best";
     private static Logger logger = Logger.getLogger(GmailSendingTest.class);
-    GmailInboxPage inboxPage = new GmailInboxPage();
+    GmailInboxPage inboxPage = new GmailInboxPage(Driver.getDriver());
     GmailDraftsPage draftsPage = new GmailDraftsPage();
     GmailSentPage sentPage = new GmailSentPage();
     private int sizeBeforeSending = 0;
@@ -35,7 +35,6 @@ public class GmailSendingTest extends AbstractTest {
     @Test(groups = "sendingTests")
     public void isLoginSuccessfully() {
         logger.info("Checking login");
-        inboxPage = new GmailInboxPage(Driver.getDriver());
         inboxPage.takeScreenShot();
         Assert.assertTrue(inboxPage.getCurrentUrl().startsWith("https://mail.google.com/mail/#inbox"));
     }

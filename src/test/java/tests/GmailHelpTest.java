@@ -18,12 +18,11 @@ public class GmailHelpTest extends AbstractTest {
     public static final String SEARCH_STRING = "черно";
     public static final String EXPECTED_OPTION = "Как сохранить черновик";
     private static Logger logger = Logger.getLogger(GmailHelpTest.class);
-    WebDriver driver = Driver.getDriver();
-    GmailInboxPage inboxPage = new GmailInboxPage();
+    GmailInboxPage inboxPage = new GmailInboxPage(Driver.getDriver());
     GmailHelpFramePage helpFramePage = new GmailHelpFramePage();
 
 
-    @Test(groups = "userHelpTests", enabled = false)
+    @Test(groups = "userHelpTests")
     public void checkDraftHelp() {
         inboxPage.openSettingsDialog();
         helpFramePage = inboxPage.openHelpDialog();

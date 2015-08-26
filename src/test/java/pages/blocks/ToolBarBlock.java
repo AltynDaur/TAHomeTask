@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='Cr aqJ']")
 public class ToolBarBlock extends HtmlElement {
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji ash T-I-ax7 L3']")
-    private Button settingsBtn;
+    private WebElement settingsBtn;
 
     @FindBy(xpath = "//div[@class='iH']/div/div[1]/div")
     private Button backToMailListBtn;
