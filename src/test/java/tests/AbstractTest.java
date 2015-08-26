@@ -8,6 +8,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pages.GmailInboxPage;
 import pages.GmailStartPage;
+import pages.util.PageUtil;
 
 /**
  * Created by Dauren_Altynbekov on 8/25/2015.
@@ -22,13 +23,9 @@ public abstract class AbstractTest {
         GmailStartPage mailStartPage = new GmailStartPage(driver);
         mailStartPage.openPage();
         mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
-        waitForLoadingPage();
+        PageUtil.waitForChangingPage(driver, "https://mail.google.com/mail/#inbox");
     }
 
-    private void waitForLoadingPage() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#inbox"));
-    }
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {

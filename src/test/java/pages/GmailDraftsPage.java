@@ -75,6 +75,7 @@ public class GmailDraftsPage extends Page {
 
     public GmailSentPage goToSent() {
         mainMenu.goToSent();
+        PageUtil.waitForChangingPage(driver, "https://mail.google.com/mail/#sent");
         return new GmailSentPage(this.driver);
     }
 

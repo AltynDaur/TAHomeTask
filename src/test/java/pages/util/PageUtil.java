@@ -1,6 +1,7 @@
 package pages.util;
 
 import com.google.common.base.Predicate;
+import driver.Driver;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -50,6 +51,11 @@ public class PageUtil {
                 return newMailDialogTitle.equals("Новое сообщение");
             }
         });
+    }
+
+    public static void waitForChangingPage(WebDriver driver, String url) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.urlContains(url));
     }
 
 

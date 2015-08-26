@@ -94,8 +94,7 @@ public class GmailSendingTest extends AbstractTest {
     @Test(groups = "sendingTests", dependsOnMethods = {"sentMailFromDraft"})
     public void checkSentMailInSentCategoory() {
         sentPage = draftsPage.goToSent();
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
-        wait.until(ExpectedConditions.urlContains("https://mail.google.com/mail/#sent"));
+
         String lastThemeInList = sentPage.getLastMailThemeInCategory().getText();
         inboxPage = sentPage.goToInbox();
         logger.info("Checking last mail in sent list: " + lastThemeInList);
