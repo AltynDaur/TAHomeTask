@@ -42,7 +42,6 @@ public class GmailSendingTest extends AbstractTest {
     @Test(groups = "sendingTests")
     public void oneCanCreateNewMail() {
         inboxPage.startNewMail();
-        inboxPage.waitForNewMailDialogTitleAppering();
         logger.info("Checking creating new mail");
         inboxPage.takeScreenShot();
         Assert.assertEquals(inboxPage.getCreatingDialogTitle(), "Новое сообщение");
@@ -53,7 +52,6 @@ public class GmailSendingTest extends AbstractTest {
         inboxPage.writeNewMail(MAIL_ADDRESS, MAIL_THEME, MAIL_BODY);
         inboxPage.closeNewMailDialog();
         draftsPage = inboxPage.goToDrafts();
-        draftsPage.waitForMailCountChanging();
         sizeBeforeSending = draftsPage.getMailListSizeWithTheme(MAIL_THEME);
         logger.info("Checking last mail in draft list: " + draftsPage.getLastMailThemeInCategory());
         draftsPage.takeScreenShot();
@@ -88,7 +86,6 @@ public class GmailSendingTest extends AbstractTest {
         draftsPage.sendMailFromDialog();
         draftsPage.goBackToMailsList();
         draftsPage.goToDrafts();
-        draftsPage.waitForMailCountChanging();
         logger.info("Checking mail list size before and after sending mail: " + sizeBeforeSending + " and " + draftsPage.getMailListSizeWithTheme(MAIL_THEME));
         draftsPage.takeScreenShot();
         Assert.assertNotEquals(sizeBeforeSending, draftsPage.getMailListSizeWithTheme(MAIL_THEME), "Size of drafts didn't changed");
@@ -110,8 +107,7 @@ public class GmailSendingTest extends AbstractTest {
     public void createNewMailWithoutAddress() {
         inboxPage.startNewMail();
         inboxPage.writeNewMail("", MAIL_THEME, MAIL_BODY);
-        inboxPage.sentNewMail();
-        inboxPage.waitForErrorMessageAppering();
+        inboxPage.sentNewMailWithError();
         String errorMessageText = inboxPage.getErrorMessage().getText();
         inboxPage.takeScreenShot();
         inboxPage.closeErrorMessage();

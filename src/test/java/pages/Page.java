@@ -22,7 +22,6 @@ public abstract class Page {
         String background = element.getCssValue("backgroundColor");
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].style.backgroundColor = 'red'", element);
-        System.out.println(element.getCssValue("backgroundColor"));
         takeScreenShot();
         executor.executeScript("arguments[0].style.backgroundColor = '" + background + "'", element);
     }

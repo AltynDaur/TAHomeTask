@@ -88,6 +88,7 @@ public class GmailDraftsPage extends Page {
 
     public void goToDrafts() {
         mainMenu.goToDrafts();
+        PageUtil.waitForMailCountChanging(driver);
     }
 
 
@@ -96,18 +97,5 @@ public class GmailDraftsPage extends Page {
         return mailsList.getMailList();
     }
 
-    public void waitForMailCountChanging() {
-        final int numberOfMailLabels = driver
-                .findElements(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]"))
-                .size();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(new Predicate<WebDriver>() {
-            @Override
-            public boolean apply(WebDriver driver) {
-                List<WebElement> mailLabelList = driver.findElements(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]"));
-                return numberOfMailLabels != mailLabelList.size();
-            }
-        });
-    }
 
 }

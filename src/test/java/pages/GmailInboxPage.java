@@ -48,6 +48,7 @@ public class GmailInboxPage extends Page {
 
     public void startNewMail() {
         mainMenu.startNewMail();
+        PageUtil.waitForNewMailDialogTitleAppering(driver);
 
     }
 
@@ -61,6 +62,7 @@ public class GmailInboxPage extends Page {
 
     public GmailDraftsPage goToDrafts() {
         mainMenu.goToDrafts();
+        PageUtil.waitForMailCountChanging(driver);
         return new GmailDraftsPage(this.driver);
     }
 
@@ -99,19 +101,13 @@ public class GmailInboxPage extends Page {
         errorMessage.closeErrorMessage();
     }
 
-    public void waitForNewMailDialogTitleAppering() {
+    public void waitForErrorMessageAppering() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(new Predicate<WebDriver>() {
-            @Override
-            public boolean apply(WebDriver driver) {
-                String newMailDialogTitle = driver.findElement(By.xpath("//div[@class='aYF']")).getText();
-                return newMailDialogTitle.equals("Новое сообщение");
-            }
-        });
+        wait.until(ExpectedConditions.visibilityOf(errorMessage.getErrorMessage()));
     }
 
-    public void waitForErrorMessageAppering() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-        wait.until(ExpectedConditions.visibilityOf(errorMessage.getErrorMessage()));
+    public void sentNewMailWithError() {
+        mailDialog.sendMailFromDialog();
+        waitForErrorMessageAppering();
     }
 }
