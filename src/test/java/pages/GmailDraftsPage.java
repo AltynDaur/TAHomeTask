@@ -14,6 +14,7 @@ import pages.blocks.EditingMailMainBlock;
 import pages.blocks.ToolBarBlock;
 import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
+import pages.util.PageUtil;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.List;
@@ -22,9 +23,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
  */
-public class GmailDraftsPage implements Page {
+public class GmailDraftsPage extends Page {
     public static final String GMAIL_DRAFTS_PAGE = "https://mail.google.com/mail/#drafts";
-    private WebDriver driver;
 
     private MainMenuBlock mainMenu;
     private MailsListBlock mailsList;
@@ -97,7 +97,7 @@ public class GmailDraftsPage implements Page {
     }
 
     public void waitForMailCountChanging() {
-        int numberOfMailLabels = driver
+        final int numberOfMailLabels = driver
                 .findElements(By.xpath("//div[@class='BltHke nH oy8Mbf' and @role='main']//tr[@class='zA yO']//div[@class='y6']/span[1]"))
                 .size();
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -109,4 +109,5 @@ public class GmailDraftsPage implements Page {
             }
         });
     }
+
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.util.PageUtil;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
@@ -14,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/12/2015.
  */
-public class GmailStartPage implements Page {
+public class GmailStartPage extends Page {
 
     public static final String HTTP_GMAIL_COM = "http://gmail.com";
-    private WebDriver driver;
+
 
     @FindBy(xpath = "//div[@id='gaia_firstform']//input[@id='Email']")
     private WebElement emailInput;
@@ -44,22 +45,15 @@ public class GmailStartPage implements Page {
         this.driver.get(HTTP_GMAIL_COM);
     }
 
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
-    }
 
-    public GmailInboxPage login(String email, String password) {
+    public void login(String email, String password) {
         emailInput.sendKeys(email);
         nextToPasswdBtn.click();
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(passwdInput));
         passwdInput.sendKeys(password);
+        highlightElement(signInBtn);
         signInBtn.click();
-        return new GmailInboxPage(this.driver);
     }
 
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-    }
 }

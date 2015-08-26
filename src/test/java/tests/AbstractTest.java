@@ -12,18 +12,17 @@ import pages.GmailStartPage;
 /**
  * Created by Dauren_Altynbekov on 8/25/2015.
  */
-public class AbstractTest {
+public abstract class AbstractTest {
     public static final String TESTING_EMAIL = "autodaurtest@gmail.com";
     public static final String TESTING_EMAIL_PASSWORD = "autodaurtest1";
     private static WebDriver driver;
-    GmailInboxPage inboxPage = new GmailInboxPage(Driver.getDriver());
 
-    public static GmailInboxPage login() {
-        GmailStartPage mailStartPage = new GmailStartPage(Driver.getDriver());
+
+    public static void login() {
+        GmailStartPage mailStartPage = new GmailStartPage(driver);
         mailStartPage.openPage();
-        GmailInboxPage inboxPage = mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
+        mailStartPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         waitForLoadingPage();
-        return inboxPage;
     }
 
     private static void waitForLoadingPage() {
@@ -34,11 +33,12 @@ public class AbstractTest {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
         driver = Driver.getDriver();
-        inboxPage = login();
+        login();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterSuite
     public void afterSuite() {
+        GmailInboxPage inboxPage = new GmailInboxPage(Driver.getDriver());
         inboxPage.logout();
         Driver.closeBrowser();
     }

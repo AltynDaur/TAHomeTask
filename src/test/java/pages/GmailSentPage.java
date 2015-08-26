@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.blocks.HeaderBlock;
 import pages.blocks.MailsListBlock;
 import pages.blocks.MainMenuBlock;
+import pages.util.PageUtil;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
@@ -13,10 +14,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/14/2015.
  */
-public class GmailSentPage implements Page {
+public class GmailSentPage extends Page {
 
     public static final String GMAIL_SENT_PAGE = "https://mail.google.com/mail/#sent";
-    private WebDriver driver;
 
     private MailsListBlock mailsList;
     private HeaderBlock header;
@@ -52,4 +52,5 @@ public class GmailSentPage implements Page {
         mainMenu.goToInbox();
         return new GmailInboxPage(this.driver);
     }
+
 }

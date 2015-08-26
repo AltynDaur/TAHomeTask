@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.blocks.*;
+import pages.util.PageUtil;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dauren_Altynbekov on 8/13/2015.
  */
-public class GmailInboxPage implements Page {
+public class GmailInboxPage extends Page {
 
     public static final String GMAIL_INBOX_PAGE = "https://mail.google.com/mail/#inbox";
     private MainMenuBlock mainMenu;
@@ -27,7 +28,6 @@ public class GmailInboxPage implements Page {
     private ToolBarBlock helpToolBar;
     private HeaderBlock header;
     private ErrorMessageBlock errorMessage;
-    private WebDriver driver;
 
     public GmailInboxPage(WebDriver driver) {
         this.driver = driver;

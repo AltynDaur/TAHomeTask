@@ -16,7 +16,7 @@ public class TestProperties {
         Properties prop = new Properties();
         FileInputStream propFile;
         try {
-            propFile = new FileInputStream("test.properties");
+            propFile = new FileInputStream("resources/test.properties");
             prop.load(propFile);
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,9 @@
 package driver;
 
+import driver.driverCreator.ChromeDriverCreator;
+import driver.driverCreator.FirefoxDriverCreator;
+import driver.driverCreator.IEDriverCreator;
+import driver.driverCreator.WebDriverCreator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -46,18 +50,19 @@ public class Driver {
 
     private static void init() {
         TestProperties.getProperties();
-
+        WebDriverCreator creator;
         switch (System.getProperty("browser")) {
             case "firefox":
-                driver = new FirefoxDriver();
+                creator = new FirefoxDriverCreator();
+                driver = new LoggingDriver(creator.getDriver());
                 break;
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", System.getProperty("chromeDriverPath"));
-                driver = new ChromeDriver();
+                creator = new ChromeDriverCreator();
+                driver = new LoggingDriver(creator.getDriver());
                 break;
             case "ie":
-                System.setProperty("webdriver.ie.driver", System.getProperty("IEDriverPath"));
-                driver = new InternetExplorerDriver();
+                creator = new IEDriverCreator();
+                driver = new LoggingDriver(creator.getDriver());
                 break;
             default:
                 throw new AssertionError("Unsupported browser: " + System.getProperty("browser"));

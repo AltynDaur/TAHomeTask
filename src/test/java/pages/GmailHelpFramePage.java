@@ -5,14 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.blocks.HelpDialogBlock;
+import pages.util.PageUtil;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 
 /**
  * Created by Dauren_Altynbekov on 8/20/2015.
  */
-public class GmailHelpFramePage {
+public class GmailHelpFramePage extends Page {
 
-    private WebDriver driver;
     private HelpDialogBlock helpDialog;
 
     @FindBy(id = "google-feedback-wizard")
@@ -46,5 +46,9 @@ public class GmailHelpFramePage {
 
     public void closeHelpFrame() {
         helpDialog.closeHelpDialog();
+    }
+
+    public void takeScreenShot() {
+        PageUtil.takeScreenShot(driver);
     }
 }
