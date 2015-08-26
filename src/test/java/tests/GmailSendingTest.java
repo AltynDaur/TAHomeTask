@@ -3,6 +3,7 @@ package tests;
 import driver.Driver;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import pages.GmailDraftsPage;
 import pages.GmailSentPage;
 import pages.GmailStartPage;

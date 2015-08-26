@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import requirements.GmailApplication;
 import steps.LoginSteps;
 import steps.SendingMailSteps;
 
@@ -17,7 +18,7 @@ import steps.SendingMailSteps;
  * Created by Dauren_Altynbekov on 8/26/2015.
  */
 @RunWith(ThucydidesRunner.class)
-@Story(SendingMailStory.class)
+@Story(GmailApplication.SendingMails.class)
 public class SendingMailStory {
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
