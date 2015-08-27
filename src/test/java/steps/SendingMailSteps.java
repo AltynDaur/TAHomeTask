@@ -19,6 +19,7 @@ public class SendingMailSteps extends ScenarioSteps {
 
     @Step
     public void createNewMail(String address, String theme, String bodyMessage) {
+        inboxPage.open();
         inboxPage.startNewMail();
         inboxPage.writeNewMail(address, theme, bodyMessage);
     }

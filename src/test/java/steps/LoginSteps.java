@@ -15,6 +15,7 @@ public class LoginSteps extends ScenarioSteps {
     @Step
     public void login() {
         GmailStartPage startPage = getPages().getPage(GmailStartPage.class);
+        startPage.open();
         startPage.login(TESTING_EMAIL, TESTING_EMAIL_PASSWORD);
         PageUtil.waitForChangingPage(getDriver(), "https://mail.google.com/mail/#inbox");
     }

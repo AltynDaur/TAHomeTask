@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.Feature;
 public class GmailApplication {
     @Feature
     public class SendingMails {
-        public class SendingMail {
+        public class SendingMailStory {
         }
 
         public class SendingMailFromDraft {
