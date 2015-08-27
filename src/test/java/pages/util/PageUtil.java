@@ -58,5 +58,13 @@ public class PageUtil {
         wait.until(ExpectedConditions.urlContains(url));
     }
 
+    public static void highlightElement(WebDriver driver, WebElement element) {
+        String background = element.getCssValue("backgroundColor");
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].style.backgroundColor = 'red'", element);
+        takeScreenShot(driver);
+        executor.executeScript("arguments[0].style.backgroundColor = '" + background + "'", element);
+    }
+
 
 }

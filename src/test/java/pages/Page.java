@@ -20,10 +20,6 @@ public abstract class Page extends PageObject {
     }
 
     public void highlightElement(WebElement element) {
-        String background = element.getCssValue("backgroundColor");
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].style.backgroundColor = 'red'", element);
-        takeScreenShot();
-        executor.executeScript("arguments[0].style.backgroundColor = '" + background + "'", element);
+        PageUtil.highlightElement(driver, element);
     }
 }
