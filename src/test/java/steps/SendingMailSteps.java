@@ -38,4 +38,9 @@ public class SendingMailSteps extends ScenarioSteps {
         draftsPage.openLastMailInCategory();
         draftsPage.sendMailFromDialog();
     }
+
+    @Step
+    public String getLastThemeInDraftsPage() {
+        return draftsPage.getLastMailThemeInCategory();
+    }
 }
