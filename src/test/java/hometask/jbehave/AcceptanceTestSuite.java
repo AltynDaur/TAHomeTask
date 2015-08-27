@@ -1,4 +1,4 @@
-package stories;
+package hometask.jbehave;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 

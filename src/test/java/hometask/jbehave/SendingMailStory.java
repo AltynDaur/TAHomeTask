@@ -1,10 +1,12 @@
-package stories;
+package hometask.jbehave;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.pages.Pages;
+import net.thucydides.jbehave.ThucydidesJBehaveTestRunner;
+import net.thucydides.jbehave.runners.ThucydidesReportingRunner;
 import net.thucydides.junit.runners.ThucydidesRunner;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
@@ -23,7 +25,7 @@ import steps.SendingMailSteps;
 /**
  * Created by Dauren_Altynbekov on 8/26/2015.
  */
-@Story(GmailApplication.SendingMails.SendingMailStory.class)
+
 public class SendingMailStory {
     public static final String MAIL_ADDRESS = "test.auto@inbox.ru";
     public static final String MAIL_THEME = "Nice test";
@@ -47,7 +49,7 @@ public class SendingMailStory {
     }
 
     @When("save it to draft")
-    public void saveToeDraft() {
+    public void saveToDraft() {
         steps.saveNewMailToDraft();
     }
 

@@ -36,7 +36,7 @@ public class MailsListBlock extends HtmlElement {
     }
 
     public List<WebElement> getMailsWithTheme(String mailTheme) {
-        List<WebElement> requiredWebElements = new ArrayList<>();
+        List<WebElement> requiredWebElements = new ArrayList<WebElement>();
         for (int i = 0; i < mailThemesList.size(); i++) {
             if (mailThemesList.get(i).getText().equals(mailTheme)) {
                 requiredWebElements.add(mailThemesList.get(i));
